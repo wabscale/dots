@@ -1,12 +1,22 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 from pwn import *
+import argparse
 
-context.log_level='debug'
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-q', '--quite', dest='quite', help='shut pwntools up', action='store_true')
+    parser.add_argument('-r', '--remote', dest='remote', help='run on remote', action='store_true')
+    parser.add_argument('-g', '--gdb', dest='gdb', help='attach to gdb', action='store_true')
+    return parser.parse_args()
+args=parse_args()
+
+context.log_level='DEBUG' if not args.quite else 'WARN'
 context.terminal='/usr/bin/zsh'
 
-if 1:
+if not args.remote:
     p=process('')
-    gdb.attach(p)
+    if args.gdb:
+        gdb.attach(p)
 else:
     p=remote('', 0)
 
@@ -14,3 +24,4 @@ def solve():
     pass
 
 solve()
+p.interactive()
