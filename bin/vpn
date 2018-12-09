@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+case "$1" in
+    "osiris")
+        openvpn --config /etc/openvpn/client/client.conf --daemon && echo "connnected to osiris vpn"
+        ;;
+    *)
+        echo ""
+        ;;
+esac

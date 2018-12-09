@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+if [ -f ~/.lastdir ]; then
+   cd $(cat ~/.lastdir)
+fi
+
+rm_crap() {
+    local crap
+    declare -a crap=(
+        ".zcompdump"
+        ".zsrchey3.cfg"
+#        ".zsh_history"
+        ".bash_history"
+        ".lesshst"
+        ".wget-hsts"
+        ".pwntools-cache"
+        ".cache/mozilla"
+        ".java"
+        ".sqlmap"
+        ".sqlite_history"
+        ".python_history"
+        ".oracle_jre_usage"
+    )
+    for i in $crap; do
+        if [ -n "$(ls -a ~ | grep $i)" ]; then
+            rm -rf ~/$i* &> /dev/null
+        fi
+    done
+}
+
+rm_crap

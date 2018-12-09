@@ -1,0 +1,16 @@
+#!/usr/bin/python
+from pwn import *
+
+context.log_level='debug'
+context.terminal='/usr/bin/zsh'
+
+if 1:
+    p=process('')
+    gdb.attach(p)
+else:
+    p=remote('', 0)
+
+def solve():
+    pass
+
+solve()

@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+from sys import argv
+
+exclude = ['.git']
+
+
+def syscall(cmd):
+    """
+    simplifies syscalls
+    """
+    return subprocess.check_output(cmd, shell=True).decode().strip()
+
+
+def traverse(path, extensions):
+    if os.path.isfile(path):
+        if extensions is None or ('.' in path and path.split('.')[1] in extensions):
+            return int(syscall(f"cat {path} | wc -l"))
+        return 0
+    count=0
+    for i in os.listdir(path):
+        if i not in exclude:
+            count += traverse(f'{path}/{i}', extensions)
+    return count
+
+
+def main():
+    path = os.getcwd()
+    extensions = argv[1:] if len(argv) > 1 else None
+    print(traverse(path, extensions))
+
+if __name__ == "__main__":
+    main()

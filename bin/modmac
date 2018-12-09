@@ -1,0 +1,33 @@
+#!/bin/bash
+
+local interface
+
+if [ "$#" = "0" ]
+then
+    interface="wlp0s20f0u1" 
+else
+    interface="$1" 
+fi
+
+moni=$interface"mon" 
+
+if [ -n "$(ifconfig | grep $moni)" ]
+then
+    airmon-ng stop $interface
+fi
+
+if [ -z "$(ifconfig | grep $interface)" ]
+then
+    return 1
+fi
+
+ifconfig $interface down
+
+if [ -n "$1" ]
+then
+    macchanger -m $1 wlan0
+else
+    macchanger -A wlan0
+fi
+
+ifconfig $interface up

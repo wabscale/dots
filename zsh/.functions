@@ -1,0 +1,168 @@
+#!/usr/bin/zsh
+
+
+o() {
+    if [ "$#" = "0" ]
+    then
+        open .
+    else
+        for file in $@
+        do
+            open $file
+        done
+    fi
+}
+
+gitc() {
+    MSG="$@"
+    git commit -m "$MSG"
+}
+
+gitdb() {
+    for i in $@
+    do
+        git push origin --delete $i
+        git branch -D $i
+        echo "deleted $i"
+    done
+}
+
+gitcb() {
+    if [ "$#" != "2" ]
+    then
+        return 1
+    fi
+    
+    git checkout -b $1 $2
+    git push --set-upstream origin $1
+    echo "created $1 from $2"
+}
+
+gitqs() {
+    git pull
+
+    if [ "$#" = "0" ]
+    then
+        COMMIT_MESSAGE="CHG"
+    else
+        COMMIT_MESSAGE="$@"
+    fi
+
+    # echo $COMMIT_MESSAGE
+    git status
+    python3 -c "print(''.join(['=' for _ in range(40)]), '', sep='\n')"
+    git add .
+    git commit -m "$COMMIT_MESSAGE"
+    git push 
+}
+
+monport() {
+    sudo tcpdump -vv port $1 and '(tcp-syn|tcp-ack)!=0'
+}
+
+lsport() {
+    lsof -i tcp:$1
+}
+
+cd() {
+    builtin cd $1
+    pwd > ~/.lastdir
+
+}
+
+c() {
+    if [ "$#" = "0" ]; then
+        cd ..;
+        l;
+    else
+        cd $1;
+        l;
+    fi
+    pwd > ~/.lastdir
+}
+
+
+py() {
+     A="$(@)"
+     /usr/bin/python -c "print $A";
+}
+
+pack() {
+    if tar zcvf $1.tgz $@; then
+        echo packed into $1.tgz
+    fi
+}
+
+e() {
+    nice emacs -nw $1
+    nice rm -rf ~/.emacs.d/backups/*
+    [ -e $1~ ] && rm $1~ &> /dev/null
+    return 0;
+}
+
+epy() {
+    nice emacs -nw --load ~/.emacs.d/pyinit.el $1
+    [ -e $1~ ] && rm $1~ &> /dev/null
+    return 0;
+}
+
+du() {
+    if [ 0 = $# ]; then
+        nice du -h -d 0 $(pwd)
+    else
+        for i in $@; do 
+            nice du -h -d 0 $i
+        done
+    fi
+}
+
+dul() {
+    if [ $# = 0 ]; then
+        DU_PATH=$(pwd)
+    else
+        DU_PATH=$(pwd)/$1
+    fi
+    
+    for i in $(ls -A $DU_PATH); do
+        nice du -h -d 0 $DU_PATH/$i;
+    done | sort -h -r -
+    
+}
+
+
+gdb() {
+    nice gdb $@
+    [ -n "$(ls -a | grep peda-session)" ] && rm peda-session*
+    [ -e .gdb_history ] && rm .gdb_history
+}
+
+dockerclean() {
+    docker kill $(docker ps -q)
+    echo "y" | docker system prune
+    if [ "$1" = "-a" ]; then
+        docker rmi $(docker image list -q)
+    fi
+}
+
+ssh() {
+    local t1
+    t1=$TERM
+    export TERM="xterm"
+    /usr/bin/ssh $@
+    export TERM=$t1
+}
+
+
+pipr() {
+    for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+        echo $dep
+        pip uninstall $dep
+    done
+}
+
+pip3r() {
+    for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+        echo $dep
+        pip uninstall $dep
+    done
+}

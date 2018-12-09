@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xhost +jc
+su jc -c "tor-browser"

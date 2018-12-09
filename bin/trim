@@ -1,0 +1,50 @@
+#!/usr/bin/python
+
+"""
+Script takes in a filename, reads it in, 
+and prints the trimmed lines to stdout.
+"""
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument(
+    'filename', type=str, help='name of file to be trimmed'
+)
+parser.add_argument(
+    '--dry', dest='dry_run', nargs='?', const=True, default=False,
+    help='specifies whether or not to overwrite file'
+)
+args = parser.parse_args()
+# print args
+#print args.filename
+
+def dry(args):
+    try:
+        with open(args.filename) as f:
+            for line in f.readlines():
+                print line.strip()
+            f.close()
+    except Exception as e:
+        print 'error', type(e), e, 'reading in dry'
+
+def overwrite(args):
+    try:
+        with open(args.filename) as f:
+            lines = f.readlines()
+        f.close()
+    except Exception as e:
+        print 'error', type(e), e, 'reading in overwrite'
+    try:
+        with open(args.filename, 'w') as f:
+            for line in lines:
+                f.write(line.strip() + '\n')
+            f.close()
+    except Exception as e:
+        print 'error', type(e), e, 'writing in overwrite'
+
+if __name__ == "__main__":
+    if args.dry_run:
+        dry(args)
+    else:
+        overwrite(args)

@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+
+from sys import argv
+
+FILENAME=argv[1]
+
+with open(FILENAME, 'r') as f:
+    lines=f.readlines()
+
+with open(FILENAME, 'w') as f:
+    for line in lines:
+        f.write(f"{line.rstrip()}\n")

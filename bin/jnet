@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "0" = "$#" ]; then
+    echo "no arguments!"
+    exit 1
+fi
+
+for i in $@; do
+    if [ -d $i ]; then
+        echo "Cannot upload directories :("
+        echo "Error: "$i
+        continue
+    fi
+    scp -i ~/.ssh/pas.pem $i ubuntu@jcunniff.net:jnet/f/
+done

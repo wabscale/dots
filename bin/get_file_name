@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import sys
+
+def main():
+    try:
+        filename = sys.argv[1]
+        print filename.split('.')[0]
+    except KeyError as e:
+        print 'No filename specified', e
+        exit(1)
+
+if __name__ == "__main__":
+    main()

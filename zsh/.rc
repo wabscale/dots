@@ -1,0 +1,28 @@
+#!/usr/bin/zsh
+
+case $- in
+    *i*);;
+    *) return;;
+esac
+
+~/dots/bin/art36 $(cat /etc/hostname)
+
+#local check_script sources
+
+check_script="print \"$HOME/dots/bin\" in \"$PATH\""
+declare -a sourcefiles=(".env_vars" ".aliases" ".functions" ".startup")
+
+if [ "False" = "$(python -c $check_script)" ]; then
+    export PATH=$HOME/dots/bin:$PATH
+    export PATH=/root/.gem/ruby/2.5.0/bin:$PATH
+fi
+
+
+for i in $sourcefiles; do
+    if [ -e ~/dots/zsh/$i ]; then
+        source ~/dots/zsh/$i
+    fi
+done
+
+
+source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

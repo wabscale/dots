@@ -1,0 +1,15 @@
+#!/bin/bash
+
+i3lock --color=202020 \
+       --ringcolor=ff0000ff \
+       --insidevercolor=00000000 \
+       --insidecolor=00000000 \
+       --timecolor=ff0000ff \
+       --datecolor=ff0000ff \
+       --ringwrongcolor=00000000 \
+       --wrongcolor=00000000 \
+       --veriftext="Yee" \
+       --wrongtext="Nah..." \
+       -f \
+       -k \
+       --blur=5

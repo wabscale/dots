@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+
+from sys import argv
+import subprocess
+import os
+
+"""
+# Usage
+
+download --jcs filename
+download --jcsl filename
+"""
+
+def shell(cmd):
+    """
+    simplifys calling shell
+    """
+    return subprocess.check_output(cmd, shell=True).decode().strip()
+
+
+JCSIP=shell('echo $JCSIP')
+CTFIP=shell('echo $CTFIP')
+
+ip_map = {
+    'jcs'  : (f'jc@{JCSIP}:', '~/.ssh/id_rsa_jc_server'),
+    'ctf'  : (f'big_j@{CTFIP}:', '~/.ssh/id_rsa_osiris'),
+}
+
+
+host, key = ip_map[argv[1]]
+global paths
+
+
+def remove_home(path):
+    HOME=shell("echo $HOME")
+    if HOME in path:
+        return '~' +  path[len(shell('echo $HOME')):]
+    return path
+
+
+def download():
+    """
+    does scp shell
+    """
+    for path in paths:
+        cmd = 'nice scp -r -i ' + key + ' ' + host + path + ' ./'
+        os.system(cmd)
+
+def select_file():
+    ls=shell(f"ssh -i {key} {host[:-1]} \"ls -a ~/uploads/\"").split('\n')
+    for i in range(len(ls)):
+        print(i, ls[i])
+    return '~/uploads/' + ls[int(input('select -> ').strip())]   
+
+if __name__ == "__main__":
+    paths = argv[2:] if len(argv) > 2 else [select_file()]
+    paths = [remove_home(path) for path in paths]
+    #print(paths)
+    download()

@@ -1,0 +1,105 @@
+#!/usr/bin/zsh
+
+# file stuff
+alias cp='cp -v'
+alias mv='mv -v'
+alias rrm='rm -r'
+alias cpr='cp -r'
+alias scp='scp -v'
+alias t='tree -aCFh -I .git'
+
+# for listing directories
+if [ -z "$(uname -a | nice grep Linux)" ]; then
+    alias ll='ls -lh'
+    alias la='ls -a'
+    alias l='ls -lhaF'
+else 
+    alias ll='ls --color=auto -l'
+    alias la='ls --color=auto -a'
+    alias l='ls --color=auto -aCFlh'
+fi
+
+# apt
+alias apt='sudo apt'
+alias apt-get='sudo apt-get'
+
+# grep related
+alias grep='grep -n --color'
+
+# git
+alias gits='git status -s'
+alias gita='git add'
+alias gitd='git diff'
+alias gitg='git grep'
+alias gitb='git branch'
+alias gitch='git checkout'
+alias gitcout='git checkout --'
+alias gitsh='git push'
+alias gitll='git pull'
+alias gitssh='git push --set-upstream origin master'
+alias gitsave='git config credential.helper store'
+alias gitbare='git config --bool core.bare true'
+alias gitrm='git rm'
+
+# for network tests
+#alias nmap='sudo nmap -sP 192.168.1.0/24'
+alias speedtest='nice curl -#  https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
+
+# for wget 
+alias wget='wget -v'
+
+# python
+alias ipy='ipython3 --autocall 1 -i'
+alias ipy3='ipython3 --autocall 1 -i'
+alias ipy2='ipython2 --autocall 1 -i'
+
+# for ccrypt
+alias cpt='ccrypt -v'
+
+# BashBunny
+# alias sshbunny='sudo screen /dev/tty.usbmodemch000001 115200'
+# export BUNNYPATH=/Volumes/BashBunny/
+
+# applications
+alias flux='cd /opt/fluxion && sudo ~/fluxion/fluxion.sh'
+alias rs='/opt/routersploit/rsf.py'
+alias binja='/opt/binja/binaryninja'
+alias ida64='wine /root/.idawine/drive_c/Program\ Files/IDA7.0/ida64.exe &> /dev/null &'
+alias ida32='wine /root/.idawine/drive_c/Program\ Files/IDA7.0/ida.exe &> /dev/null &'
+
+# xclip
+alias xclip='xclip -selection c'
+
+# ssh
+alias jcs='ssh -i ~/.ssh/id_rsa_jc_server jc@$JCSIP'
+alias jcsl='ssh -i ~/.ssh/id_rsa_jc_server jc@jc-server.home'
+alias pas='ssh -i ~/.ssh/pas.pem ubuntu@jcunniff.net'
+alias ctfbox='ssh ctfbox'
+
+# PAS
+alias pash='~/Documents/PAS/pash/__init__.py'
+
+# misc.
+alias rsync='rsync -r -v --progress -e ssh'
+alias rc='e ~/.zshrc; source ~/.zshrc'
+alias src='source ~/.zshrc'
+alias curl='curl --include'
+alias docker='sudo docker'
+alias base64='base64 -w 0'
+alias cll='clear; l'
+alias make='make -B'
+alias de=deactivate
+alias arch=archey3
+alias top=htop
+alias wh=which
+alias cl=clear
+alias p=ccat
+alias q=exit
+
+# lolz
+alias gimmesetup='cp ~/dots/setup.sh ./; touch requirements.txt'
+alias gimmesolve='cp ~/dots/solve ./'
+alias gimmerun='cp ~/dots/run.sh ./'
+alias onoz='less /var/log/errors.log'
+alias wtf='dmesg | less'
+alias gimme='touch'

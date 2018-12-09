@@ -1,0 +1,229 @@
+#!/usr/bin/python3
+
+from colorama import Fore, Style
+import json, time, pyfiglet, sys
+from sys import argv
+
+def generate_ascii_art(message, font='slant', width=200, color=None, frame=None):
+    """
+    creates ascii art
+
+    example usage:
+
+    generate(
+        'message',
+        font='small',
+        width=100,
+        color='yellow',
+        frame='blue'
+    )
+
+    :param message: message to be converted into ascii characters
+    :param font: ascii art font
+    :param width: size of the font
+    :param color: color of the text
+    :param frame: color of the frame (if none given, no frame created)
+    :return: generated ascii text
+    """
+    raw_ascii = pyfiglet.figlet_format(message, font=font, width=width)
+    split_ascii = raw_ascii.split('\n')
+
+    if color is not None:
+        for index in range(len(split_ascii)):
+            split_ascii[index] = color_str(split_ascii[index], color=color)
+
+    if frame is None:
+        return '\n'.join(split_ascii)
+
+    split_ascii.pop()
+    horizontal_frame = color_str('-' * (len(split_ascii[0]) - 5), frame)
+    framed_ascii_arr = [horizontal_frame]
+    left_bar = color_str('| ', frame)
+    right_bar = color_str(' |', frame)
+    for index in range(len(split_ascii)):
+        framed_ascii_arr.append(left_bar + split_ascii[index] + right_bar)
+    framed_ascii_arr.append(horizontal_frame)
+    return '\n'.join(framed_ascii_arr)
+
+
+def color_str(msg, color='red') -> str:
+    """
+    Will return the colored version of msg.
+
+    :param msg: the str to be colored.
+    :param color: the desired color
+    :return: colored msg as str
+    """
+    colors = {
+        'red': Fore.RED,
+        'blue': Fore.BLUE,
+        'green': Fore.GREEN,
+        'yellow': Fore.YELLOW,
+        'purple': Fore.MAGENTA,
+        'white': Fore.WHITE,
+        'cyan': Fore.CYAN
+    }
+    return colors[color] + str(msg) + Style.RESET_ALL
+
+
+def color_print(*args, color='red', end='\n'):
+    """
+    Will print the args in order in color.
+
+    :param args: list of arguments to be colored
+    :param color: the desired color
+    :param end: end of print char
+    :return: None
+    """
+    for msg in args:
+        print(color_str(str(msg), color=color), end='')
+    print(end=end)
+
+
+def color_input(prompt, color='red', accept_null=False):
+    """
+    Will prompt the user for input with prompt being colored.
+    Will by default not accept null input.
+
+    :param prompt: user prompt
+    :param color: color for prompt
+    :param accept_null: bool
+    :return: user input as str
+    """
+    res = input(color_str(prompt, color=color))
+    if not accept_null:
+        if res == '':
+            return color_input(prompt, color, accept_null)
+    return res
+
+
+def pretty_print(data, color=None):
+    """
+    Prints data with an indent of 4.
+    Data can be any interable data structure that is json sterilizable
+
+    :param data:
+    :param color:
+    :return:
+    """
+    if color is None:
+        print(str(json.dumps(data, indent=4)))
+    else:
+        color_print(str(json.dumps(data, indent=4)), color=color)
+
+
+class ProgressBar:
+    def __init__(self, length):
+        self.bar = [' ' for _ in range(length)]
+        self.length = length
+
+    def __len__(self):
+        return self.length
+
+    def __setitem__(self, index, value):
+        if index >= len(self):
+            return
+        self.bar[index] = value
+
+    def __str__(self):
+        bar = '[' + ''.join(self.bar) + ' ' * (self.length - len(self.bar)) + ']'
+        return color_str(bar, 'white')
+
+
+class CustomProgressBar(ProgressBar):
+    def __init__(self, length, msg='', start=True):
+        """
+        creates a custom progress bar that must be incremented manually
+        :param length: length of bar to be used
+        :param msg: message that goes along with progress bar
+        :param start: bool to indicate whether or not to call start at end of init
+        """
+        super(CustomProgressBar, self).__init__(length // 4)
+        self.msg = color_str(msg, 'yellow')
+        self.index = 0
+        self.symbol_index = 0
+        self.symbols = [' ', '-', '=', '#']
+        if start:
+            self.start()
+
+    def print_bar(self):
+        """
+        prints the bar with message and percentage
+        """
+        l = self.length * 4
+        percent = 100 - int(((l - (self.index * 4 + self.symbol_index)) / l) * 100)
+        percent = percent if percent <= 100 else 100
+        percent = ' ' + color_str(' ' + str(percent) + ' % ', 'red')
+        sys.stdout.write('\r' + str(self) + percent + self.msg + '  ')
+
+    def start(self):
+        """
+        prints init bar
+        """
+        self.print_bar()
+
+    def increment(self, p_bar=True):
+        """
+        increments bar values
+        prints bar if p_bar
+
+        :param p_bar: if p_bar: self.print_bar()
+        """
+        if self.symbol_index == 3:
+            self.symbol_index = 0
+            self.index += 1
+        else:
+            self.symbol_index += 1
+            self[self.index] = self.symbols[self.symbol_index]
+        if p_bar:
+            self.print_bar()
+
+    def end(self):
+        """
+        should be called once task finished
+        prints the bar with a green 100 % next to it
+        will fix any weird shit that came up
+        """
+        percent = color_str(' 100 % ', 'green')
+        self.bar = list(map(lambda x: '#', self.bar))
+        sys.stdout.write('\r' + str(self) + percent + self.msg + '  \n')
+
+def pretty_progress_bar(wait_time, progress_count=30, msg='', erase=False):
+    """
+    Prints a progress bar that blocks for wait_time
+    seconds with progress_count blocks.
+
+    :param wait_time: time in seconds to wait
+    :param progress_count: amount of blocks to print in progress bar
+    :param msg: optional parameter for message str
+    :param erase: true will make bar get deleted after completion
+    """
+
+    msg = color_str(msg, color='yellow')
+    progress_bar = ProgressBar(progress_count)
+    sep_time = ((wait_time / progress_count) * 0.995) / 4
+    # print(sep_time)
+    for i in range(progress_count):
+        for k in [' ', '-', '=', '#']:
+            progress_bar[i] = k
+            percent = ' ' + str(100 - int((int(wait_time - (i * sep_time * 4 / 0.995) - 1) / wait_time) * 100)) + ' % '
+            percent = color_str(percent, 'red')
+            # time_remaining = ' ' + str(int(wait_time - (i * sep_time * 4 / 0.995) - 1)) + ' s'
+            # time_remaining = color_str(time_remaining, 'yellow')
+            sys.stdout.write('\r' + str(progress_bar) + percent + msg)
+            time.sleep(sep_time)
+    sys.stdout.write('\r' + str(progress_bar) + color_str(' 100 % ', 'green') + msg)
+    if erase:
+        sys.stdout.write('\r' + ' ' * (10 + progress_count + len(msg)) + '\r')
+    else:
+        sys.stdout.write('\n')
+
+
+star = color_str('[*]', 'yellow')
+minus = color_str('[-]', 'red')
+plus = color_str('[+]', 'green')
+
+
+if __name__ == "__main__":
+    from sys import argv
+    print(gen_ascii(argv[1],c='yellow',frame='red',font='starwars'))
