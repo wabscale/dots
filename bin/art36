@@ -225,5 +225,6 @@ plus = color_str('[+]', 'green')
 
 
 if __name__ == "__main__":
+    gen_ascii=generate_ascii_art
     from sys import argv
-    print(gen_ascii(argv[1],c='yellow',frame='red',font='starwars'))
+    print(gen_ascii(argv[1],color='yellow',frame='red',font='starwars'))
