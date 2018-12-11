@@ -8,7 +8,7 @@ rm_crap() {
     local crap
     declare -a crap=(
         ".zcompdump"
-        ".zsrchey3.cfg"
+        ".archey3.cfg"
 #        ".zsh_history"
         ".bash_history"
         ".lesshst"

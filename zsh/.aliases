@@ -40,6 +40,7 @@ alias gitssh='git push --set-upstream origin master'
 alias gitsave='git config credential.helper store'
 alias gitbare='git config --bool core.bare true'
 alias gitrm='git rm'
+alias gitcl='git clone --recurse-submodules'
 
 # for network tests
 #alias nmap='sudo nmap -sP 192.168.1.0/24'
@@ -64,8 +65,6 @@ alias cpt='ccrypt -v'
 alias flux='cd /opt/fluxion && sudo ~/fluxion/fluxion.sh'
 alias rs='/opt/routersploit/rsf.py'
 alias binja='/opt/binja/binaryninja'
-alias ida64='wine /root/.idawine/drive_c/Program\ Files/IDA7.0/ida64.exe &> /dev/null &'
-alias ida32='wine /root/.idawine/drive_c/Program\ Files/IDA7.0/ida.exe &> /dev/null &'
 
 # xclip
 alias xclip='xclip -selection c'
@@ -75,9 +74,6 @@ alias jcs='ssh -i ~/.ssh/id_rsa_jc_server jc@$JCSIP'
 alias jcsl='ssh -i ~/.ssh/id_rsa_jc_server jc@jc-server.home'
 alias pas='ssh -i ~/.ssh/pas.pem ubuntu@jcunniff.net'
 alias ctfbox='ssh ctfbox'
-
-# PAS
-alias pash='~/Documents/PAS/pash/__init__.py'
 
 # misc.
 alias rsync='rsync -r -v --progress -e ssh'
