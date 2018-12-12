@@ -94,9 +94,8 @@ alias p=ccat
 alias q=exit
 
 # lolz
-alias gimmesetup='cp ~/dots/pwn/setup.sh ./; touch requirements.txt'
-alias gimmesolve='cp ~/dots/pwn/solve ./'
-alias gimmerun='cp ~/dots/pwn/run.sh ./'
+alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
+alias gimmesolve='cp ~/dots/templates/solve ./'
 alias onoz='less /var/log/errors.log'
 alias wtf='dmesg | less'
 alias gimme='touch'
