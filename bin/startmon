@@ -1,18 +1,10 @@
 #!/bin/bash
 
 
-local interface
-
-if [ "$#" = "0" ]; then
-    interface="wlp0s20f0u1" 
-else
-    interface="$1" 
-fi
-
-moni=$interface"mon" 
+moni=$INTERFACE"mon" 
 
 if [ -z "$(ifconfig | grep $moni)" ]; then
-    airmon-ng start $interface
+    airmon-ng start $INTERFACE
 fi
 
 airodump-ng $moni

@@ -1,17 +1,10 @@
 #!/bin/bash
 
-local interface
 
-if [ "$#" = "0" ]; then
-    interface="wlp0s20f0u1mon" 
-else
-    interface="$1" 
-fi
+moni=$INTERFACE"mon" 
 
-moni=$interface"mon" 
-
-if [ -n "$(ifconfig | grep $interface)" ]
+if [ -n "$(ifconfig | grep $INTERFACE)" ]
 then
-    airmon-ng stop $interface
+    airmon-ng stop $INTERFACE
     service NetworkManager start
 fi
