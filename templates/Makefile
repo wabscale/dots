@@ -19,7 +19,7 @@ rund: killd
 	${DOCKER} run ${DOCKER_OPTIONS} --name ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}
 
 killd:
-	@if [ -z "$(${DOCKER} ps -q) | grep ${DOCKER_IMAGE_NAME}" ]; then \
+	@if [ -n "$(${DOCKER} ps -q) | grep ${DOCKER_IMAGE_NAME}" ]; then \
 		${DOCKER} kill ${DOCKER_IMAGE_NAME}; \
 	fi
 
