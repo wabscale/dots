@@ -20,7 +20,7 @@ rund: killd
 
 killd:
 	@if [ -z "$(${DOCKER} ps -q) | grep ${DOCKER_IMAGE_NAME}" ]; then \
-		${DOCKER} kill ${DOCKER_IMAGE_NAME} \
+		${DOCKER} kill ${DOCKER_IMAGE_NAME}; \
 	fi
 
 setup:
@@ -36,7 +36,7 @@ setup:
 
 run: 
 	@if [ -d ${ENV_NAME} ]; then \
-		make setup \
+		make setup; \
 	fi
 	./${ENV_NAME}/bin/python ${MAIN_NAME}
 
