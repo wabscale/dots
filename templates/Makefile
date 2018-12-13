@@ -41,6 +41,7 @@ run:
 	./${ENV_NAME}/bin/python ${MAIN_NAME}
 
 cleand: killd
+	echo 'y' | ${DOCKER} system prune
 	${DOCKER} rmi ${DOCKER_IMAGE_NAME}
 
 clean:
