@@ -8,7 +8,7 @@ DOCKER_IMAGE_NAME=
 DOCKER_OPTIONS=--rm -it
 DOCKER=sudo docker
 
-.PHONY: run setup build rund killd
+.PHONY: run setup build rund killd clean cleand
 
 all: build
 
@@ -39,3 +39,11 @@ run:
 		make setup \
 	fi
 	./${ENV_NAME}/bin/python ${MAIN_NAME}
+
+cleand: killd
+	${DOCKER} rmi ${DOCKER_IMAGE_NAME}
+
+clean:
+	@if [ -d ${ENV_NAME} ]; then \
+		rm -rf ${ENV_NAME}; \
+	fi
