@@ -35,7 +35,7 @@ setup:
 	./${ENV_NAME}/bin/pip install -r requirements.txt
 
 run: 
-	@if [ -d ${ENV_NAME} ]; then \
+	@if [ ! -d ${ENV_NAME} ]; then \
 		make setup; \
 	fi
 	./${ENV_NAME}/bin/python ${MAIN_NAME}
