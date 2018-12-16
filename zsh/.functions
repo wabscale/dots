@@ -166,3 +166,10 @@ pip3r() {
         pip uninstall $dep
     done
 }
+
+tri() {
+    local packages mode
+    mode=$1
+    packages=$@
+    su jc -c "nice trizen ${mode} ${packages}"
+}
