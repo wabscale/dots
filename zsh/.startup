@@ -5,7 +5,8 @@ if [ -f ~/.lastdir ]; then
 fi
 
 rm_crap() {
-    local crap
+    local crap localls
+    localls=$(ls -a ~)
     declare -a crap=(
         ".zcompdump"
         ".archey3.cfg"
@@ -22,7 +23,7 @@ rm_crap() {
         ".oracle_jre_usage"
     )
     for i in $crap; do
-        if [ -n "$(ls -a ~ | grep $i)" ]; then
+        if [ -n "$(echo ${localls} | grep $i)" ]; then
             rm -rf ~/$i* &> /dev/null
         fi
     done
