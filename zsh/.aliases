@@ -83,7 +83,6 @@ alias curl='curl --include'
 alias docker='sudo docker'
 alias base64='base64 -w 0'
 alias cll='clear; l'
-alias make='make -B'
 alias sysd=systemctl
 alias de=deactivate
 alias arch=archey3
