@@ -1,7 +1,7 @@
 # Python
 MAIN_NAME=
 ENV_NAME=venv
-PYTHON_VERSION=/usr/bin/python3
+PYTHON_VERSION=`which python3`
 
 # Docker
 DOCKER_IMAGE_NAME=
