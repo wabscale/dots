@@ -2,6 +2,7 @@
 
 from sys import argv
 import subprocess
+import json
 import os
 
 """
@@ -18,14 +19,7 @@ def shell(cmd):
     return subprocess.check_output(cmd, shell=True).decode().strip()
 
 
-JCSIP=shell('echo $JCSIP')
-CTFIP=shell('echo $CTFIP')
-
-ip_map = {
-    'jcs'  : (f'jc@{JCSIP}:', '~/.ssh/id_rsa_jc_server'),
-    'ctf'  : (f'big_j@{CTFIP}:', '~/.ssh/id_rsa_osiris'),
-}
-
+ip_map=json.loads(shell('ip_map'))
 
 host, key = ip_map[argv[1]]
 global paths
