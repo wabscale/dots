@@ -7,10 +7,20 @@ PYTHON_VERSION=`which python3`
 DOCKER_IMAGE_NAME=
 DOCKER_OPTIONS=--rm -it
 DOCKER=sudo docker
+DOCKER_COMPOSE=sudo docker-compose
 
 .PHONY: run setup build rund killd clean cleand
 
 all: build
+
+deploy: ckill
+	${DOCKER_COMPOSE} up -d
+
+cbuild:
+	${DOCKER_COMPOSE} build
+
+ckill:
+	${DOCKER_COMPOSE} kill
 
 build:
 	${DOCKER} build -t ${DOCKER_IMAGE_NAME} .
@@ -42,7 +52,9 @@ run:
 
 cleand: killd
 	echo 'y' | ${DOCKER} system prune
-	${DOCKER} rmi ${DOCKER_IMAGE_NAME}
+	if [ -n "`${DOCKER} image list -q | grep ${DOCKER_IMAGE_NAME}`" ]; then \
+		${DOCKER} rmi ${DOCKER_IMAGE_NAME}; \
+	fi
 
 clean:
 	if [ -d ${ENV_NAME} ]; then \
