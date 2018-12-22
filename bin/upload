@@ -20,7 +20,7 @@ def shell(cmd):
     """
     return subprocess.check_output(cmd, shell=True).decode().strip()
 
-ip_map = json.loads(shell('ip_map'))
+ip_map = json.loads(shell('echo $IP_MAP'))
 
 host, key = ip_map[argv[1]]
 #global PATH
