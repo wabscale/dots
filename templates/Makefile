@@ -6,8 +6,8 @@ PYTHON_VERSION=`which python3`
 # Docker
 DOCKER_IMAGE_NAME=
 DOCKER_OPTIONS=--rm -it
-DOCKER=sudo docker
-DOCKER_COMPOSE=sudo docker-compose
+DOCKER=docker
+DOCKER_COMPOSE=docker-compose
 
 .PHONY: run setup build rund killd clean cleand
 
