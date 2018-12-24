@@ -95,7 +95,7 @@ pack() {
 
 e() {
     nice emacs -nw $1
-    nice rm -rf ~/.emacs.d/backups/*
+    nice rm -rf ~/.emacs.d/backups/* &> /dev/null
     [ -e $1~ ] && rm $1~ &> /dev/null
     return 0;
 }
