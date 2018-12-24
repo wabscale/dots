@@ -61,5 +61,5 @@ clean:
 		rm -rf ${ENV_NAME}; \
 	fi
 	if [ -n "`find . -name __pycache__`" ]; then \
-		rm -rf `find . -name __pycache__`;
+		rm -rf `find . -name __pycache__`; \
 	fi
