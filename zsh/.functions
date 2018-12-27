@@ -166,7 +166,7 @@ pip3r() {
     done
 }
 
-tri() {
+trizen() {
     local packages mode
     mode=$1
     packages=$@
