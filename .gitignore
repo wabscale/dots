@@ -2,6 +2,7 @@ binja
 ida
 disp
 sound
+jnet
 
 .env_vars
 .Xauthority
