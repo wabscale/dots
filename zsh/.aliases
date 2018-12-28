@@ -85,7 +85,6 @@ alias base64='base64 -w 0'
 alias cll='clear; l'
 alias sysd=systemctl
 alias de=deactivate
-alias arch=archey3
 alias top=htop
 alias wh=which
 alias cl=clear
