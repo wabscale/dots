@@ -143,13 +143,13 @@ dockerclean() {
     fi
 }
 
-ssh() {
-    local t1
-    t1=$TERM
-    export TERM="xterm"
-    /usr/bin/ssh $@
-    export TERM=$t1
-}
+# ssh() {
+#     local t1
+#     t1=$TERM
+#     export TERM="xterm"
+#     /usr/bin/ssh $@
+#     export TERM=$t1
+# }
 
 
 pipr() {
