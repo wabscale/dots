@@ -13,12 +13,12 @@ o() {
     fi
 }
 
-gitc() {
+gitc() { # git commit 
     MSG="$@"
     git commit -m "$MSG"
 }
 
-gitdb() {
+gitdb() { # git delete branch
     for i in $@
     do
         git push origin --delete $i
@@ -27,7 +27,7 @@ gitdb() {
     done
 }
 
-gitcb() {
+gitcb() { # git create branch
     if [ "$#" != "2" ]
     then
         return 1
@@ -38,7 +38,7 @@ gitcb() {
     echo "created $1 from $2"
 }
 
-gitqs() {
+gitqs() { # git quick save
     git pull
 
     if [ "$#" = "0" ]
@@ -137,34 +137,26 @@ gdb() {
 
 dockerclean() {
     docker kill $(docker ps -q)
-    echo "y" | docker system prune
+    yes | docker system prune
     if [ "$1" = "-a" ]; then
         docker rmi $(docker image list -q)
     fi
 }
 
-# ssh() {
-#     local t1
-#     t1=$TERM
-#     export TERM="xterm"
-#     /usr/bin/ssh $@
-#     export TERM=$t1
+
+# pipr() { # dangerous
+#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+#         echo $dep
+#         pip uninstall $dep
+#     done
 # }
 
-
-pipr() {
-    for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
-        echo $dep
-        pip uninstall $dep
-    done
-}
-
-pip3r() {
-    for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
-        echo $dep
-        pip uninstall $dep
-    done
-}
+# pip3r() {
+#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+#         echo $dep
+#         pip uninstall $dep
+#     done
+# }
 
 trizen() {
     local packages mode

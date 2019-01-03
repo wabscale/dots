@@ -8,7 +8,7 @@ alias cpr='cp -r'
 alias scp='scp -v'
 alias t='tree -aCFh -I .git'
 
-# for listing directories
+# ls stuff
 if [ -z "$(uname -a | nice grep Linux)" ]; then
     alias ll='ls -lh'
     alias la='ls -a'
@@ -63,27 +63,21 @@ alias cpt='ccrypt -v'
 
 # applications
 alias flux='cd /opt/fluxion && sudo ~/fluxion/fluxion.sh'
-alias rs='/opt/routersploit/rsf.py'
+alias rsf='docker build -t routersploit /opt/routersploit && docker run --rm -ti routersploit'
 alias binja='/opt/binja/binaryninja'
 
 # xclip
 alias xclip='xclip -selection c'
 
-# ssh
-alias jcs='ssh -i ~/.ssh/id_rsa_jc_server jc@$JCSIP'
-alias jcsl='ssh -i ~/.ssh/id_rsa_jc_server jc@jc-server.home'
-alias pas='ssh -i ~/.ssh/pas.pem ubuntu@jcunniff.net'
-alias ctfbox='ssh ctfbox'
-
 # misc.
 alias rsync='rsync -r -v --progress -e ssh'
-alias rc='e ~/.zshrc; source ~/.zshrc'
-alias src='source ~/.zshrc'
-alias curl='curl --include'
-alias docker='sudo docker'
+alias src='unalias -a; source ~/.zshrc'
+alias erc='e ~/.zshrc; source ~/.zshrc'
+alias efunc='e ~/dots/zsh/.functions'
+alias ealias='e ~/dots/zsh/.aliases'
 alias base64='base64 -w 0'
 alias cll='clear; l'
-alias sysd=systemctl
+alias ctl=systemctl
 alias de=deactivate
 alias top=htop
 alias wh=which
