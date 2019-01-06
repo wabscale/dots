@@ -1,25 +1,4 @@
-#!/usr/bin/python3
+#!/bin/sh
 
-import os
-import subprocess
-from shutil import rmtree as rmdir
-from sys import argv
-
-def syscall(cmd):
-    """
-    simplifies syscalls
-    """
-    return subprocess.check_output(cmd, shell=True).decode().strip()
-
-
-def rmpyc(path):
-    dirs = syscall('find . -name __pycache__').split('\n')
-    for d in dirs:
-        rmdir(d)
-
-def main():
-    path = argv[1] if len(argv) > 1 else os.getcwd()
-    rmpyc(path)
-
-if __name__ == "__main__":
-    main()
+rm -rf `find . -name __pycache__` &> /dev/null
+rm -rf `find . | grep ".pyc"` &> /dev/null
