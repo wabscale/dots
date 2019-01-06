@@ -1,0 +1,85 @@
+#!/usr/bin/python3
+from colorama import Fore, Style
+from Crypto.Cipher import AES
+from Crypto import Random
+import pyperclip
+import argparse
+import getpass
+import hashlib
+import base64
+import sys
+
+def parse_args():
+    parser=argparse.ArgumentParser(description='Command line AES CBC encryption tool')
+    parser.add_argument('-e', '--encrypt', action='store_true', dest='encrypt', help='encrypt data')
+    parser.add_argument('-d', '--decrypt', action='store_true', dest='decrypt', help='decrypt data')
+    parser.add_argument('-o', '--output', dest='output', default=None, help='optinal output file')
+    parser.add_argument('-i', '--input', dest='input', default=None, help='optinal input file')
+    parser.add_argument('-c', '--clip', dest='clip', action='store_true', help='copy output to ')
+    return parser.parse_args()
+
+def color_str(s, color):
+    return '{color}{s}{reset_all}'.format(
+        color=Fore.__dict__[color.upper()],
+        s=s,
+        reset_all=Style.RESET_ALL,
+    )
+
+class AESCipher(object):
+    def __init__(self, key): 
+        self.bs = 32
+        self.key = hashlib.sha256(key.encode()).digest()
+
+    def encrypt(self, raw):
+        raw = self._pad(raw)
+        raw=raw.encode() if isinstance(raw, str) else raw
+        iv = Random.new().read(AES.block_size)
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return base64.b64encode(iv + cipher.encrypt(raw)).decode('utf-8')
+
+    def decrypt(self, enc):
+        enc = base64.b64decode(enc)
+        enc=enc.encode() if isinstance(enc, str) else enc
+        iv = enc[:AES.block_size]
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
+
+    def _pad(self, s):
+        return s + (self.bs - len(s) % self.bs) * chr(self.bs - len(s) % self.bs)
+
+    @staticmethod
+    def _unpad(s):
+        return s[:-ord(s[len(s)-1:])]
+
+def encrypt(key):
+    data=open(args.input, 'rb').read() if args.input is not None else getpass.getpass('enter unencrypted data: ')
+    out_stream=open(args.output, 'wb') if args.output is not None else sys.stdout
+    enc_data=AESCipher(key).encrypt(data)
+    out_stream.write(enc_data)
+    if args.clip:
+        pyperclip.copy(enc_data)
+
+def decrypt(key):
+    data=open(args.input, 'rb').read() if args.input is not None else getpass.getpass('enter encrypted data: ')
+    out_stream=open(args.output, 'wb') if args.output is not None else sys.stdout
+    dec_data=AESCipher(key).decrypt(data)
+    out_stream.write(dec_data)
+    if args.clip:
+        pyperclip.copy(dec_data)
+
+def main():
+    if args.encrypt == args.decrypt:
+        print(minus, 'make a decision! encrypt or decrypt')
+        exit(1)
+    key=getpass.getpass('enter key: ')
+    if args.encrypt:
+        encrypt(key)
+    elif args.decrypt:
+        decrypt(key)
+
+if __name__ == "__main__":
+    args=parse_args()
+    plus=color_str('[+]', 'green')
+    minus=color_str('[-]', 'red')
+    star=color_str('[*]', 'yellow')
+    main()
