@@ -2,11 +2,11 @@
 
 while true
 do
+	#--collapse-threads=true \
 	s=$(uuidgen | tr -d '\n')
         pscircle \
 	    --root-pid=1 \
             --show-root=1 \
-	    --collapse-threads=true \
 	    --max-children=35 \
 	    --tree-sector-angle=3.1415 \
 	    --tree-rotate=true \
