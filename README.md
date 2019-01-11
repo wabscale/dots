@@ -10,3 +10,4 @@ I run arch linux with the i3 window manager, and polybar instead of i3status. Th
 - [polybar](https://github.com/jaagr/polybar) 
 - [xorg](https://www.x.org/wiki/)
 - [xcompmgr](https://wiki.archlinux.org/index.php/Xcompmgr)
+- [pscircle](https://gitlab.com/mildlyparallel/pscircle)
