@@ -79,6 +79,7 @@ alias base64='base64 -w 0'
 alias cll='clear; l'
 alias ctl=systemctl
 alias de=deactivate
+alias startx=xinit # don't ask
 alias top=htop
 alias wh=which
 alias cl=clear
