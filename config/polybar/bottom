@@ -3,7 +3,7 @@ accent = #fba922
 
 [bar/top]
 enable-ipc = true
-monitor = eDP-1
+monitor = eDP1
 width = 100%
 height = 27
 
@@ -39,7 +39,7 @@ wm-restack = bspwm
 tray-position = right
 
 [bar/bottom]
-monitor = eDP-1
+monitor = eDP1
 bottom = true
 width = 100%
 height = 27
@@ -125,7 +125,7 @@ label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
 
 ; [module/xbacklight]
 ; type = internal/xbacklight
-; output = eDP-1
+; output = eDP1
 ; format = <ramp> <bar>
 
 ; ramp-0 = 
