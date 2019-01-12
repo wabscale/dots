@@ -31,12 +31,12 @@
 !------------------------------------------------------------------------------
 ! URxvt Settings  
 urxvt*geometry:         80x21
-urxvt*font:             xft:Inconsolata for Powerline:size=12:antialias=true:autohint=true
+urxvt*font:             xft:Hack:size=12:antialias=true:autohint=true
 urxvt*scrollBar:        false
 urxvt.urgentOnBell:     true
 URxvt.perl-ext:
 URxvt.perl-ext-common:
-XTerm.vt100.faceName:   DejaVu Sans Mono:style=Book:antialias=false
+XTerm.vt100.faceName:   Hack:antialias=false
 
 
 !rofi.font: Anonymous Pro, Regular, 20
