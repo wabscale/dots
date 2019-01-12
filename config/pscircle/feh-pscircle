@@ -1,0 +1,49 @@
+#!/bin/bash
+
+HOME=/root
+DISPLAY=:0
+
+
+# --tree-font-color=94bfd1 \
+# --dot-color-min=7c762f \
+# --dot-color-max=b56e46 \
+
+while true
+do
+	#--collapse-threads=true \
+        #--tree-radius-increment=150 \
+	s=$(uuidgen | tr -d '\n')
+        pscircle \
+	    --root-pid=1 \
+            --show-root=1 \
+	    --max-children=75 \
+	    --tree-sector-angle=3.1415 \
+	    --tree-rotate=true \
+	    --tree-rotation-angle=1.5708 \
+	    --tree-center=-1580:0 \
+	    --cpulist-center=300:0 \
+	    --memlist-center=800:0 \
+            --memory-unit=G \
+            --tree-anchor-proc-name=termite \
+            --tree-anchor-proc-angle=0 \
+	    --background-color=1e2226 \
+	    --link-color-min=375143a0 \
+	    --link-color-max=375143 \
+            --dot-color-min=ff0000 \
+	    --dot-color-max=ff0000 \
+	    --tree-font-size=18 \
+            --tree-font-color=00cc00 \
+	    --tree-font-face="Noto Sans" \
+	    --toplists-row-height=35 \
+	    --toplists-font-size=24 \
+	    --toplists-font-color=C8D2D7 \
+	    --toplists-pid-font-color=7B9098 \
+	    --toplists-font-face="Liberation Sans" \
+	    --toplists-bar-height=7 \
+	    --toplists-bar-background=444444 \
+	    --toplists-bar-color=7d54dd \
+            --output=/tmp/${s}
+        feh --bg-max --no-fehbg /tmp/${s}
+	rm /tmp/$s
+	sleep 1
+done
