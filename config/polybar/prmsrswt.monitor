@@ -51,7 +51,7 @@ module-margin = 1.5
 
 modules-left = volume backlight battery mpd
 modules-center = i3
-modules-right = wlan cpu date time
+modules-right = wlan time
 
 tray-position = none
 tray-detached = true

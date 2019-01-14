@@ -7,11 +7,12 @@ DISPLAY=:0
 # --tree-font-color=94bfd1 \
 # --dot-color-min=7c762f \
 # --dot-color-max=b56e46 \
+# --toplists-font-color=C8D2D7 \
+#--collapse-threads=true \
+#--tree-radius-increment=150 \
 
 while true
 do
-	#--collapse-threads=true \
-        #--tree-radius-increment=150 \
 	s=$(uuidgen | tr -d '\n')
         pscircle \
 	    --root-pid=1 \
@@ -36,7 +37,7 @@ do
 	    --tree-font-face="Noto Sans" \
 	    --toplists-row-height=35 \
 	    --toplists-font-size=24 \
-	    --toplists-font-color=C8D2D7 \
+            --toplist-font-color=00cc00 \
 	    --toplists-pid-font-color=7B9098 \
 	    --toplists-font-face="Liberation Sans" \
 	    --toplists-bar-height=7 \

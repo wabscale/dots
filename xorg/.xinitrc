@@ -1,5 +1,5 @@
 cd ~
 xrdb ~/.Xresources
-#~/.fehbg &
+~/.fehbg &
 xcompmgr &
 exec i3

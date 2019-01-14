@@ -84,7 +84,7 @@ c() {
 
 py() {
      A="$(@)"
-     /usr/bin/python -c "print $A";
+     /usr/bin/python2 -c "print $A";
 }
 
 pack() {
