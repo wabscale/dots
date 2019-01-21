@@ -69,7 +69,7 @@
  '(html-basic-offset 4 t)
  '(package-selected-packages
    (quote
-    (docker-compose-mode cmake-mode cython-mode jinja2-mode dockerfile-mode php-mode py-autopep8 material-theme irony flycheck elpy ein better-defaults auto-complete-clang-async auto-complete-clang auto-complete-c-headers))))
+    (markdown-mode docker-compose-mode cmake-mode cython-mode jinja2-mode dockerfile-mode php-mode py-autopep8 material-theme irony flycheck elpy ein better-defaults auto-complete-clang-async auto-complete-clang auto-complete-c-headers))))
 
 ;; (setq-default indent-tabs-mode nil)
 ;; (setq-default tab-width 4)
