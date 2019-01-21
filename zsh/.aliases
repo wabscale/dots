@@ -43,10 +43,6 @@ alias gitrm='git rm'
 alias gitcl='git clone --recurse-submodules'
 
 # for network tests
-#alias nmap='sudo nmap -sP 192.168.1.0/24'
-alias speedtest='nice curl -#  https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
-
-# for wget 
 alias wget='wget -v'
 
 # python
