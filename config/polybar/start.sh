@@ -15,5 +15,11 @@ if [ -n "$(xrandr | grep DP2\ connected)" ]; then
     # polybar -c /root/.config/polybar/top.monitor example &
 fi
 
+if [ -n "$(xrandr | grep DP1\ connected)" ]; then
+    polybar -c /root/.config/polybar/prmsrswt.monitor1 white &
+    # polybar -c /root/.config/polybar/bottom.monitor bottom &
+    # polybar -c /root/.config/polybar/top.monitor example &
+fi
+
 
 echo "bars launched..."

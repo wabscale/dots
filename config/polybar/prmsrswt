@@ -213,15 +213,21 @@ label-urgent-foreground = #0000ff
 
 [module/time]
 type = internal/date
-
 interval = 1.0
 
-date =  %I:%M %P
+time =  %I:%M:%S %P
+time-alt =  %I:%M:%S %P
 
-[module/date]
-type = internal/date
-date =  %e %B - %A
-label = %date%
+date =
+date-alt = %Y-%m-%d
+
+label = %time% %date%
+; date =  %I:%M %P
+
+; [module/date]
+; type = internal/date
+; date =  %e %B - %A
+; label = %date%
 
 
 [module/battery]
@@ -247,52 +253,52 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-[module/volume]
-type = internal/volume
+; [module/volume]
+; type = internal/volume
 
-format-volume = <ramp-volume> <label-volume>
-format-muted =  0%
+; format-volume = <ramp-volume> <label-volume>
+; format-muted =  0%
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+; ramp-volume-0 = 
+; ramp-volume-1 = 
+; ramp-volume-2 = 
 
-[module/mpd]
-type = internal/mpd
+; [module/mpd]
+; type = internal/mpd
 
-label-offline = mpd is offline
-format-online = <icon-prev> <toggle> <icon-next> <label-song>
-format-offline = <label-offline>
-host = 127.0.0.1
-port = 6600
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+; label-offline = mpd is offline
+; format-online = <icon-prev> <toggle> <icon-next> <label-song>
+; format-offline = <label-offline>
+; host = 127.0.0.1
+; port = 6600
+; icon-prev = 
+; icon-stop = 
+; icon-play = 
+; icon-pause = 
+; icon-next = 
 
-label-song-maxlen = 25
-label-song-ellipsis = true
+; label-song-maxlen = 25
+; label-song-ellipsis = true
 
-bar-progress-width = 10
-bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
+; bar-progress-width = 10
+; bar-progress-indicator = |
+; bar-progress-fill = ─
+; bar-progress-empty = ─
 
-[module/backlight]
-type = internal/backlight
+; [module/backlight]
+; type = internal/backlight
 
-; Use the following command to list available cards:
-; $ ls -1 /sys/class/backlight/
-card = radeon_bl0
+; ; Use the following command to list available cards:
+; ; $ ls -1 /sys/class/backlight/
+; card = radeon_bl0
 
-format = <ramp> <label>
+; format = <ramp> <label>
 
-label = %percentage%%
+; label = %percentage%%
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+; ramp-0 = 
+; ramp-1 = 
+; ramp-2 = 
 
 [module/wlan]
 type = internal/network
@@ -301,13 +307,13 @@ interface = wlp1s0
 
 interval = 5
 
-label-connected =  %essid%
+label-connected =  %essid% %local_ip%
 label-disconnected =  Not Connected
 
-[module/network]
-type = internal/network
-interface = wlp1s0
-label-connected =  %downspeed% |  %upspeed%
+; [module/network]
+; type = internal/network
+; interface = wlp1s0
+; label-connected =  %downspeed% |  %upspeed%
 
 [bar/float]
 
