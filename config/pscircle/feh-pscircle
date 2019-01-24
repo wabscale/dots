@@ -37,7 +37,7 @@ do
 	    --tree-font-face="Noto Sans" \
 	    --toplists-row-height=35 \
 	    --toplists-font-size=24 \
-            --toplist-font-color=00cc00 \
+            --toplists-font-color=00cc00 \
 	    --toplists-pid-font-color=7B9098 \
 	    --toplists-font-face="Liberation Sans" \
 	    --toplists-bar-height=7 \
