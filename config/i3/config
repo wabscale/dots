@@ -186,8 +186,7 @@ bindsym $mod+l exec /root/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+d exec dmenu_run
 
-# bindcode 69 exec xkeyboard 0
-# bindcode 70 exec xkeyboard 75
-# bindcode 71 exec xbacklight -dec 5
-# bindcode 72 exec xbacklight -inc 5
-# bindcode 73 exec xbacklight -set 0
+
+for_window [class="^.*"] border pixel 0
+gaps inner 5
+gaps outer 5
