@@ -5,7 +5,12 @@ case $- in
     *) return;;
 esac
 
-~/dots/bin/art36 $(cat /etc/hostname)
+
+if [ "`hostname`" = "kalima" ]; then
+    ~/dots/zsh/kalima
+else
+    ~/dots/bin/art36 $(cat /etc/hostname)
+fi
 
 #local check_script sources
 
