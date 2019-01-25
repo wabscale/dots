@@ -32,7 +32,6 @@ gitcb() { # git create branch
     then
         return 1
     fi
-    
     git checkout -b $1 $2
     git push --set-upstream origin $1
     echo "created $1 from $2"
@@ -94,7 +93,11 @@ pack() {
 }
 
 e() {
-    nice emacs -nw $1
+    if ! emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null; then
+        emacsclient -c "$1"
+    else
+        emacsclient "$1"
+    fi
     [ -e $1~ ] && rm $1~ &> /dev/null
     return 0;
 }
