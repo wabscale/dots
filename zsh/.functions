@@ -93,11 +93,12 @@ pack() {
 }
 
 e() {
-    if ! emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null; then
-        emacsclient -c "$1"
-    else
-        emacsclient "$1"
-    fi
+    emacsclient -c "$1"
+    # if ! emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null; then
+    #     emacsclient -c "$1"
+    # else
+    #     emacsclient "$1"
+    # fi
     [ -e $1~ ] && rm $1~ &> /dev/null
     return 0;
 }
