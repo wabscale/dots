@@ -5,14 +5,19 @@ case $- in
     *) return;;
 esac
 
-~/dots/bin/art36 $(cat /etc/hostname)
+
+if [ "`hostname`" = "kalima" ]; then
+    ~/dots/zsh/kalima
+else
+    ~/dots/bin/art36 $(cat /etc/hostname)
+fi
 
 #local check_script sources
 
 check_script="print \"$HOME/dots/bin\" in \"$PATH\""
 declare -a sourcefiles=(".env_vars" ".aliases" ".functions" ".startup")
 
-if [ "False" = "$(python -c $check_script)" ]; then
+if [ "False" = "$(python2 -c $check_script)" ]; then
     export PATH=$HOME/dots/bin:$PATH
     export PATH=$HOME/.gem/ruby/2.5.0/bin:$PATH
 fi
@@ -25,4 +30,4 @@ for i in $sourcefiles; do
 done
 
 
-source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

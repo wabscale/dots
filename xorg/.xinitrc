@@ -1,5 +1,6 @@
 cd ~
 xrdb ~/.Xresources
 ~/.fehbg &
-xcompmgr &
+compton &
+emacs --daemon &
 exec i3

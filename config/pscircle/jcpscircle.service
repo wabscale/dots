@@ -1,0 +1,11 @@
+[Unit]
+Description=pscircle daemon
+After=suspend.target
+
+[Service]
+Environment=DISPLAY=:0,HOME=/root
+ExecStart=/root/dots/config/pscircle/feh-pscircle
+
+[Install]
+WantedBy=suspend.target
+WantedBy=multi-user.target
