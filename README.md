@@ -1,4 +1,4 @@
-OB# Here are my dotfiles
+# Here are my dotfiles
 
 I run arch linux with the i3 window manager, and polybar instead of i3status. The result is this:
 
