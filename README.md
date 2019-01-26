@@ -1,4 +1,4 @@
-# Here are my dotfiles
+OB# Here are my dotfiles
 
 I run arch linux with the i3 window manager, and polybar instead of i3status. The result is this:
 
@@ -6,8 +6,8 @@ I run arch linux with the i3 window manager, and polybar instead of i3status. Th
 
 # dependencies
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [i3](https://i3wm.org/) 
+- [i3-gaps](https://github.com/Airblader/i3) 
 - [polybar](https://github.com/jaagr/polybar) 
 - [xorg](https://www.x.org/wiki/)
-- [xcompmgr](https://wiki.archlinux.org/index.php/Xcompmgr)
-- [pscircle](https://gitlab.com/mildlyparallel/pscircle)
+- [compton](https://github.com/chjj/compton)
+- [spacemacs](http://spacemacs.org/)
