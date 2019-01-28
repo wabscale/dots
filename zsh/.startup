@@ -10,7 +10,8 @@ rm_crap() {
     declare -a crap=(
         ".zcompdump"
         ".archey3.cfg"
-#        ".zsh_history"
+        # ".zsh_history"
+        ".mysql_history"
         ".bash_history"
         ".lesshst"
         ".wget-hsts"
