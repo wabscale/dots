@@ -137,11 +137,11 @@ gdb() {
 }
 
 dockerclean() {
+    # https://lebkowski.name/docker-volumes/
     docker kill $(docker ps -q)
     docker system prune -f
-    if [ "$1" = "-a" ]; then
-        docker rmi $(docker image list -q)
-    fi
+    docker rmi $(docker image list -q)
+    docker volume ls -qf dangling=true | xargs -r docker volume rm
 }
 
 
