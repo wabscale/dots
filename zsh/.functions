@@ -138,7 +138,7 @@ gdb() {
 
 dockerclean() {
     docker kill $(docker ps -q)
-    yes | docker system prune
+    docker system prune -f
     if [ "$1" = "-a" ]; then
         docker rmi $(docker image list -q)
     fi
