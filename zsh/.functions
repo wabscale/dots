@@ -52,7 +52,7 @@ gitqs() { # git quick save
     python3 -c "print(''.join(['=' for _ in range(40)]), '', sep='\n')"
     git add .
     git commit -m "$COMMIT_MESSAGE"
-    git push 
+    git push
 }
 
 monport() {
@@ -93,21 +93,18 @@ pack() {
 }
 
 e() {
+    if ! emacsclient -e "(daemonp)" &> /dev/null; then
+        echo "starting daemon...";
+        emacs --daemon &> /dev/null;
+    fi
     emacsclient -c "$1"
-    # if ! emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null; then
-    #     emacsclient -c "$1"
-    # else
-    #     emacsclient "$1"
-    # fi
-    [ -e $1~ ] && rm $1~ &> /dev/null
-    return 0;
 }
 
-epy() {
-    nice emacs -nw --load ~/.emacs.d/pyinit.el $1
-    [ -e $1~ ] && rm $1~ &> /dev/null
-    return 0;
-}
+# epy() {
+#     nice emacs -nw --load ~/.emacs.d/pyinit.el $1
+#     [ -e $1~ ] && rm $1~ &> /dev/null
+#     return 0;
+# }
 
 du() {
     if [ 0 = $# ]; then
@@ -125,11 +122,11 @@ dul() {
     else
         DU_PATH=$(pwd)/$1
     fi
-    
+
     for i in $(ls -A $DU_PATH); do
         nice du -h -d 0 $DU_PATH/$i;
     done | sort -h -r -
-    
+
 }
 
 
@@ -140,11 +137,11 @@ gdb() {
 }
 
 dockerclean() {
+    # https://lebkowski.name/docker-volumes/
     docker kill $(docker ps -q)
-    yes | docker system prune
-    if [ "$1" = "-a" ]; then
-        docker rmi $(docker image list -q)
-    fi
+    docker system prune -f
+    docker rmi $(docker image list -q)
+    docker volume ls -qf dangling=true | xargs -r docker volume rm
 }
 
 
