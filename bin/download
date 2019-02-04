@@ -28,14 +28,14 @@ def download(f):
     else:
         cmd='nice scp -r {server}:{f} ./'
     cmd = cmd.format(
-        server=args.server,
+        server=args.server[0],
         f=f
     )
     os.system(cmd)
 
 def select_file():
-    ls=shell('ssh {server} "ls -l"'.format(
-        server=args.server
+    ls=shell('ssh {server} "ls -l uploads"'.format(
+        server=args.server[0]
     )).split('\n')
     for i in range(len(ls)):
         print(i, ls[i])
@@ -55,11 +55,7 @@ def main():
         download(select_file())
         exit(0)
     for f in args.files:
-        if args.pack:
-            f=create_archive()
         download(f)
-        if args.pack:
-            delete_archive()
 
 if __name__ == "__main__":
     args=parse_args()
