@@ -24,6 +24,7 @@ rm_crap() {
         ".java"
         ".sqlmap"
         ".sqlite_history"
+        ".recently-used"
         ".python_history"
         ".oracle_jre_usage"
     )
