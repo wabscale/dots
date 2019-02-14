@@ -29,7 +29,7 @@ plugins=(
 )
 
 if [ "`hostname`" = "kalima" ]; then
-    ~/dots/zsh/kalima
+    cat ~/dots/zsh/kalima | lolcat
 else
     ~/dots/bin/art36 $(cat /etc/hostname)
 fi
@@ -64,6 +64,7 @@ rm_crap() {
         ".zcompdump"
         ".archey3.cfg"
         # ".zsh_history"
+        ".zcompdump-kalima-5.7.1"
         ".mysql_history"
         ".bash_history"
         ".lesshst"

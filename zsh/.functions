@@ -165,7 +165,3 @@ trizen() {
     packages=$@
     su jc -c "nice trizen ${mode} ${packages}"
 }
-
-dockerrl() {
-    curl https://${DOCKER_REGISTRY_URL}/v2/_catalog
-}
