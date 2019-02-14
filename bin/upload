@@ -50,9 +50,9 @@ def create_archive(f):
     os.system(cmd)
     return '{f}.tgz'.format(f=f)
 
-def delete_archive():
-    print(f'rm {PATH}')
-    os.remove(PATH)
+def delete_archive(f):
+    print('rm {f}'.format(f=f))
+    os.remove(f)
 
 def main():
     if len(args.files) == 0:
@@ -60,10 +60,10 @@ def main():
         exit(0)
     for f in args.files:
         if args.pack:
-            f=create_archive()
+            f=create_archive(f)
         upload(f)
         if args.pack:
-            delete_archive()
+            delete_archive(f)
 
 if __name__ == "__main__":
     args=parse_args()
