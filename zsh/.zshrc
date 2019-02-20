@@ -10,7 +10,6 @@ case $- in
     *) return;;
 esac
 
-
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="jmc"
@@ -24,8 +23,10 @@ plugins=(
     cp
     archlinux
     battery
-    web-search
-    python
+    docker
+    docker-compose
+#    web-search
+#    python
 )
 
 if [ "`hostname`" = "kalima" ]; then
@@ -42,20 +43,6 @@ if [ "False" = "$(python2 -c $check_script)" ]; then
     export PATH=$HOME/.gem/ruby/2.5.0/bin:$PATH
 fi
 
-declare -a sourcefiles=(
-    ".env_vars"
-    ".aliases"
-    ".functions"
-)
-for i in $sourcefiles; do
-    if [ -e $HOME/dots/zsh/$i ]; then
-        source $HOME/dots/zsh/$i
-    fi
-done
-
-if [ -f ~/.lastdir ]; then
-   cd $(cat ~/.lastdir)
-fi
 
 rm_crap() {
     local crap localls
@@ -64,7 +51,7 @@ rm_crap() {
         ".zcompdump"
         ".archey3.cfg"
         # ".zsh_history"
-        ".zcompdump-kalima-5.7.1"
+        # ".zcompdump"
         ".mysql_history"
         ".bash_history"
         ".lesshst"
@@ -93,3 +80,19 @@ rm_crap
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+declare -a sourcefiles=(
+    ".env_vars"
+    ".aliases"
+    ".functions"
+)
+for i in $sourcefiles; do
+    if [ -e $HOME/dots/zsh/$i ]; then
+        source $HOME/dots/zsh/$i
+    fi
+done
+
+if [ -f ~/.lastdir ]; then
+   cd $(cat ~/.lastdir)
+fi
