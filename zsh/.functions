@@ -144,6 +144,10 @@ dockerclean() {
     docker volume ls -qf dangling=true | xargs -r docker volume rm
 }
 
+dockerkill() {
+    docker kill `docker ps -q`
+    docker system prune -f
+}
 
 # pipr() { # dangerous
 #     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
