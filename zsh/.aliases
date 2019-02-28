@@ -3,7 +3,7 @@
 # file stuff
 alias cp='cp -v'
 alias mv='mv -v'
-alias rrm='rm -r'
+alias rmr='rm -r'
 alias cpr='cp -r'
 alias scp='scp -v'
 alias t='tree -aCFh -I .git'
@@ -13,7 +13,7 @@ if [ -z "$(uname -a | nice grep Linux)" ]; then
     alias ll='ls -lh'
     alias la='ls -a'
     alias l='ls -lhaF'
-else 
+else
     alias ll='ls --color=auto -l'
     alias la='ls --color=auto -a'
     alias l='ls --color=auto -aCFlh'
@@ -56,11 +56,6 @@ alias cpt='ccrypt -v'
 # BashBunny
 # alias sshbunny='sudo screen /dev/tty.usbmodemch000001 115200'
 # export BUNNYPATH=/Volumes/BashBunny/
-
-# applications
-alias flux='cd /opt/fluxion && sudo ~/fluxion/fluxion.sh'
-alias rsf='docker build -t routersploit /opt/routersploit && docker run --rm -ti routersploit'
-alias binja='/opt/binja/binaryninja'
 
 # xclip
 alias xclip='xclip -selection c'
