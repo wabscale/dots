@@ -80,6 +80,7 @@ alias q=exit
 # lolz
 alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
 alias gimmesolve='cp ~/dots/templates/solve ./'
+alias gimmedenv='cp -r ~/dots/templates/denv ./'
 alias onoz='less /var/log/errors.log'
 alias wtf='dmesg | less'
 alias gimme='touch'
