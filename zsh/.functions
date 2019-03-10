@@ -136,12 +136,21 @@ gdb() {
     [ -e .gdb_history ] && rm .gdb_history
 }
 
+dockerkill() {
+    docker kill `docker ps -q`
+    docker system prune -f
+}
+
+dockercleanv() {
+    docker volume ls -qf dangling=true | xargs -r docker volume rm
+    docker system prune -f
+}
+
 dockerclean() {
     # https://lebkowski.name/docker-volumes/
-    docker kill $(docker ps -q)
-    docker system prune -f
-    docker rmi $(docker image list -q)
-    docker volume ls -qf dangling=true | xargs -r docker volume rm
+    dockerkill
+    dockercleanv
+    docker rmi `docker image list -q`
 }
 
 

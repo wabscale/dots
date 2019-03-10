@@ -10,6 +10,9 @@ i3lock --color=202020 \
        --wrongcolor=00000000 \
        --veriftext="Yee" \
        --wrongtext="Nah..." \
+       --timestr="%I:%M:%S %P" \
+       --radius 120 \
+       --datestr="%d/%m/%Y" \
+       --blur=5 \
        -f \
-       -k \
-       --blur=5
+       -k 

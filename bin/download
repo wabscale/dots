@@ -1,16 +1,11 @@
 #!/usr/bin/python3
 
-from sys import argv
+from argparse import ArgumentParser
 import subprocess
+import hashlib
+import time
 import json
 import os
-
-"""
-# Usage
-
-download --jcs filename
-download --jcsl filename
-"""
 
 def shell(cmd):
     """
@@ -18,36 +13,50 @@ def shell(cmd):
     """
     return subprocess.check_output(cmd, shell=True).decode().strip()
 
+def parse_args():
+    parser=ArgumentParser('command to quickly scp files onto servers\nservers must be defined in ~/.ssh/config')
+    parser.add_argument('server', nargs=1, help='name of server that is defined in ssh config file')
+    parser.add_argument('files', nargs='*', help='files to be downloaded')
+    return parser.parse_args()
 
-ip_map=json.loads(shell('echo $IP_MAP'))
-
-host, key = ip_map[argv[1]]
-global paths
-
-
-def remove_home(path):
-    HOME=shell("echo $HOME")
-    if HOME in path:
-        return '~' +  path[len(shell('echo $HOME')):]
-    return path
-
-
-def download():
+def download(f):
     """
     does scp shell
     """
-    for path in paths:
-        cmd = 'nice scp -r -i ' + key + ' ' + host + ':' + path + ' ./'
-        os.system(cmd)
+    if not f.startswith('~') and not f.startswith('/'):
+        cmd='nice scp -r {server}:~/uploads/{f} ./'
+    else:
+        cmd='nice scp -r {server}:{f} ./'
+    cmd = cmd.format(
+        server=args.server[0],
+        f=f
+    )
+    os.system(cmd)
 
 def select_file():
-    ls=shell(f"ssh -i {key} {host[:-1]} \"ls -a ~/uploads/\"").split('\n')
+    ls=shell('ssh {server} "ls -l uploads"'.format(
+        server=args.server[0]
+    )).split('\n')
     for i in range(len(ls)):
         print(i, ls[i])
-    return '~/uploads/' + ls[int(input('select -> ').strip())]   
+    return ls[int(input('select -> ').strip())]
+
+def create_archive(f):
+    cmd = "tar zcvf {f}.tgz {f}".format(f=f)
+    os.system(cmd)
+    return '{f}.tgz'.format(f=f)
+
+def delete_archive():
+    print(f'rm {PATH}')
+    os.remove(PATH)
+
+def main():
+    if len(args.files) == 0:
+        download(select_file())
+        exit(0)
+    for f in args.files:
+        download(f)
 
 if __name__ == "__main__":
-    paths = argv[2:] if len(argv) > 2 else [select_file()]
-    paths = [remove_home(path) for path in paths]
-    #print(paths)
-    download()
+    args=parse_args()
+    main()

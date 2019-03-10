@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from sys import argv
+from argparse import ArgumentParser
 import subprocess
 import hashlib
 import time
@@ -20,55 +20,24 @@ def shell(cmd):
     """
     return subprocess.check_output(cmd, shell=True).decode().strip()
 
-ip_map = json.loads(shell('echo $IP_MAP'))
+def parse_args():
+    parser=ArgumentParser('command to quickly scp files onto servers\nservers must be defined in ~/.ssh/config')
+    parser.add_argument('--pack', dest='pack', action='store_true', help='pack files into .tgz archive before uploading')
+    # parser.add_argument('--safe', dest='safe', action='store_true', help='do not check to see if file already exists on server')
+    # parser.add_argument('--hash', dest='hash', action='store_true', help='hash the filename to ensure that nothing is overwritten on server')
+    parser.add_argument('server', nargs=1, help='name of server that is defined in ssh config file')
+    parser.add_argument('files', nargs='*', help='files to be uploaded')
+    return parser.parse_args()
 
-host, key = ip_map[argv[1]]
-#global PATH
-PATH=''
-
-def parse_options():
-    options = ['SAFE', 'PACK', 'HASH']
-    option_args = list(filter(lambda arg: '--' in arg, argv))
-    for op in options:
-        op_val = False if f"--{op.lower()}" not in option_args else True
-        exec(f"global {op}; {op}={op_val}")
-
-def filename_check():
-    return HASH or PATH.split('/')[-1] in shell(f"ssh -i {key} {host} \"ls -a ~/uploads/\"").split('\n')
-
-def make_safe_filename():
-    fname, ext = split_filename()
-    hashed_fname = fname + '_' + hashlib.sha256(f"{fname}{float(time.time())}".encode()).hexdigest()
-    if ext is not None:
-        hashed_fname += ext
-    print(f"uploaded to ~/uploads/{hashed_fname}")
-    return hashed_fname
-
-def split_filename():
-    fname = PATH.split('/')[-1]
-    extension = None
-    if '.' in fname:
-        fsplit = fname.split('.')
-        fname, extension = fsplit[0], '.' + '.'.join(fsplit[1:])
-    return fname, extension 
-
-def isdir(filename):
-    abspath = shell('pwd') + '/' + filename
-    return os.path.isdir(abspath)
-
-def upload():
+def upload(f):
     """
     does scp shell
     """
-    cmd = 'nice scp -r -i ' + key + ' ' + PATH + ' ' + host + ':~/uploads/'
-    if not SAFE and filename_check():
-        cmd += make_safe_filename()
-    else:
-        flag=None
+    cmd = 'nice scp -r {f} {server}:~/uploads/'.format(
+        server=args.server,
+        f=f
+    )
     os.system(cmd)
-    if 'flag' in locals():
-        print(f"uploaded to ~/uploads/{PATH.split('/')[-1]}")
-    #os.system(cmd)
 
 def select_file():
     ls=os.listdir('./')
@@ -76,30 +45,26 @@ def select_file():
         print(i, ls[i])
     return ls[int(input('select -> ').strip())]
 
-def create_archive():
-    global PATH
-    cmd = f"tar zcvf {PATH}.tgz {PATH}"
-    print(cmd)
-    return_code = os.system(cmd)
-    PATH = f"{PATH}.tgz"
-    return return_code
+def create_archive(f):
+    cmd = "tar zcvf {f}.tgz {f}".format(f=f)
+    os.system(cmd)
+    return '{f}.tgz'.format(f=f)
 
-def delete_archive():
-    print(f'rm {PATH}')
-    os.remove(PATH)
+def delete_archive(f):
+    print('rm {f}'.format(f=f))
+    os.remove(f)
 
+def main():
+    if len(args.files) == 0:
+        upload(select_file())
+        exit(0)
+    for f in args.files:
+        if args.pack:
+            f=create_archive(f)
+        upload(f)
+        if args.pack:
+            delete_archive(f)
 
 if __name__ == "__main__":
-    parse_options()
-    files = list(filter(lambda arg: '--' not in arg, argv[2:]))
-    if len(files) == 0:
-        files.append(select_file())
-    for f in files:
-        print('-' * 20)
-        PATH = f
-        if PACK and create_archive() != 0:
-            print(f'error in packing {PATH} into tar ball')
-            exit(1)
-        upload()
-        if PACK:
-            delete_archive()
+    args=parse_args()
+    main()

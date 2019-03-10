@@ -111,9 +111,10 @@ exec_always --no-startup-id /root/.config/polybar/start.sh
 bindsym $mod+Shift+a exec termite --exec=/root/dots/bin/sound
 bindsym $mod+Shift+s exec scrot '%s.png' -e 'mv $f ~/shots/'
 bindsym $mod+Shift+w exec termite --exec=/usr/bin/wifi-menu
-bindsym $mod+Shift+o exec xrandr --output DP2 --off
+bindsym $mod+Shift+o exec xrandr --output DP1 --off && xrandr --output DP2 --off && /root/.config/polybar/start.sh
 bindsym $mod+Shift+d exec /root/dots/bin/disp right rotate
 bindsym $mod+Shift+b exec /root/dots/bin/disp right
+bindsym $mod+Shift+t exec /root/dots/bin/starttor
 bindsym $mod+l exec /root/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+d exec dmenu_run

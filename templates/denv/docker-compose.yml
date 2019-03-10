@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  denv:
+    build: .
+    image: denv
+    container_name: denv
+    volumes:
+      - "$PWD:/root/host"
