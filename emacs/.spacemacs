@@ -31,11 +31,13 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     javascript
+     react
      php
      rust
      nginx
      sql
-     javascript
+     js2-mode
      html
      markdown
      python
@@ -75,6 +77,7 @@ values."
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
                                     smartparens
+                                    emmet-mode
                                     )
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -318,6 +321,10 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default c-basic-offset 4)
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
+  (setq css-indent-offset 2) ; css-mode
   )
 
 (defun dotspacemacs/user-config ()
