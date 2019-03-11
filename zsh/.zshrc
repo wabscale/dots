@@ -68,6 +68,7 @@ rm_crap() {
         ".recently-used"
         ".python_history"
         ".oracle_jre_usage"
+        ".node_repl_history"
     )
     for i in $crap; do
         if [ -n "$(echo ${localls} | grep $i)" ]; then
