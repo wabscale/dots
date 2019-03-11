@@ -79,9 +79,6 @@ rm_crap() {
 
 rm_crap
 
-source $ZSH/oh-my-zsh.sh
-source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 
 declare -a sourcefiles=(
     ".env_vars"
@@ -97,3 +94,7 @@ done
 if [ -f ~/.lastdir ]; then
    cd $(cat ~/.lastdir)
 fi
+
+source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
