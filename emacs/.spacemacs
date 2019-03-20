@@ -320,11 +320,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default c-basic-offset 4)
-  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
-  (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
-  (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
-  (setq css-indent-offset 2) ; css-mode
   )
 
 (defun dotspacemacs/user-config ()
@@ -358,7 +353,22 @@ you should place your code here."
                     (unless (string= (car kill-ring) xsel-output)
                       xsel-output )))
                 (setq interprogram-cut-function 'xsel-cut-function)
-                (setq interprogram-paste-function 'xsel-paste-function))))
+                (setq interprogram-paste-function 'xsel-paste-function)))
+  )
+  (setq-default c-basic-offset 4)
+  (setq-default python-indent-offset 4)
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
+  (setq css-indent-offset 2) ; css-mode
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode t)
+              (setq tab-width 4)
+              (setq python-indent-offset 4)))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . jinja2-mode))
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  (setq vc-follow-symlinks nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
