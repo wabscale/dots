@@ -114,6 +114,7 @@ bindsym $mod+Shift+w exec termite --exec=/usr/bin/wifi-menu
 bindsym $mod+Shift+o exec xrandr --output DP1 --off && xrandr --output DP2 --off && /root/.config/polybar/start.sh
 bindsym $mod+Shift+d exec /root/dots/bin/disp right rotate
 bindsym $mod+Shift+b exec /root/dots/bin/disp right
+bindsym $mod+Shift+m exec /root/dots/bin/disp mirror
 bindsym $mod+Shift+t exec /root/dots/bin/starttor
 bindsym $mod+l exec /root/dots/bin/lock
 bindsym $mod+Shift+f exec firefox

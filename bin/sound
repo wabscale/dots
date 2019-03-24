@@ -1,0 +1,44 @@
+#!/bin/bash
+
+##################
+#
+# sound <argument>
+#
+#################
+#
+# sound on
+# sound off
+# sound a
+#
+#################
+
+USAGE="sound <option> -- program that adjusts sound settings through alsa drivers"
+
+
+case "$1" in
+    -h)
+        echo $USAGE
+        ;;
+    --help)
+        echo $USAGE
+        ;;
+    on)
+        amixer sset Master unmute &> /dev/null
+        amixer sset Speaker unmute &> /dev/null
+        amixer sset Headphone unmute &> /dev/null
+        ;;
+    off)
+        amixer sset Master mute &> /dev/null
+        amixer sser Speaker mute &> /dev/null
+        amixer sset Headphone mute &> /dev/null
+        ;;
+    *)
+        alsamixer
+        ;;
+esac
+
+#amixer sset Master unmute
+#amixer sset Speaker unmute
+#amixer sset Headphone unmute
+
+#alsamixer

@@ -68,6 +68,7 @@ rm_crap() {
         ".recently-used"
         ".python_history"
         ".oracle_jre_usage"
+        ".node_repl_history"
     )
     for i in $crap; do
         if [ -n "$(echo ${localls} | grep $i)" ]; then
@@ -77,9 +78,6 @@ rm_crap() {
 }
 
 rm_crap
-
-source $ZSH/oh-my-zsh.sh
-source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 declare -a sourcefiles=(
@@ -96,3 +94,7 @@ done
 if [ -f ~/.lastdir ]; then
    cd $(cat ~/.lastdir)
 fi
+
+source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+

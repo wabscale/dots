@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+case "$1" in
+    left)
+        SIDE="--left-of"
+        ;;
+    right)
+        SIDE="--right-of"
+        ;;
+    mirror)
+        SIDE="--reflect"
+        ;;
+    *)
+        SIDE="--right-of"
+        ;;
+esac
+
+case "$2" in
+    rotate)
+        ROTATE="--rotate right"
+        ;;
+    *)
+        ROTATE=""
+        ;;
+esac
+
+if [ -n "`xrandr | grep DP1\ connected`" ]; then
+    xrandr --output DP1 ${ROTATE} --auto ${SIDE} eDP1
+fi
+if [ -n "`xrandr | grep DP2\ connected`" ]; then
+    xrandr --output DP2 ${ROTATE} --auto ${SIDE} eDP1
+fi
+
+/root/.fehbg
+/root/dots/config/polybar/start.sh

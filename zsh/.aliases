@@ -19,10 +19,6 @@ else
     alias l='ls --color=auto -aCFlh'
 fi
 
-# apt
-alias apt='sudo apt'
-alias apt-get='sudo apt-get'
-
 # grep related
 alias grep='grep -n --color'
 

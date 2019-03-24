@@ -1,9 +1,6 @@
 binja
-ida
-disp
-sound
 jnet
+speedtest
 
 .env_vars
 .Xauthority
-speedtest
