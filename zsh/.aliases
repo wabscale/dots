@@ -56,6 +56,21 @@ alias cpt='ccrypt -v'
 # xclip
 alias xclip='xclip -selection c'
 
+# docker
+alias dr='docker'
+alias dps='docker ps'
+alias drmi='docker rmi'
+alias dls='docker image ls'
+alias dshell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm debian:stretch'
+alias ashell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm alpine:3.9'
+
+# docker-compose
+alias drc='docker-compose'
+alias dbuild='docker-compose build'
+alias dup='docker-compose up'
+alias ddown='docker-compose down'
+alias dkill='docker-compose kill'
+
 # misc.
 alias rsync='rsync -r -v --progress -e ssh'
 alias src='unalias -a; source ~/.zshrc'
