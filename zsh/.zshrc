@@ -84,6 +84,7 @@ declare -a sourcefiles=(
     ".env_vars"
     ".aliases"
     ".functions"
+    ".env_vars"
 )
 for i in $sourcefiles; do
     if [ -e $HOME/dots/zsh/$i ]; then

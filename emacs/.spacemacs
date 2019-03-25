@@ -363,12 +363,16 @@ you should place your code here."
   (setq css-indent-offset 2) ; css-mode
   (add-hook 'python-mode-hook
             (lambda ()
-              (setq indent-tabs-mode t)
-              (setq tab-width 4)
               (setq python-indent-offset 4)))
   (add-to-list 'auto-mode-alist '("\\.html\\'" . jinja2-mode))
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (setq vc-follow-symlinks nil)
+  (defun fmt ()
+    "indent whole buffer"
+    (interactive)
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
