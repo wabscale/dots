@@ -95,9 +95,9 @@ pack() {
 e() {
     if ! emacsclient -e "(daemonp)" &> /dev/null; then
         echo "starting daemon...";
-        emacs --daemon &> /dev/null;
+        emacs -nw --daemon &> /dev/null;
     fi
-    emacsclient -c "$1"
+    emacsclient -nw -c "$1"
 }
 
 # epy() {
@@ -173,4 +173,18 @@ trizen() {
     mode=$1
     packages=$@
     su jc -c "nice trizen ${mode} ${packages}"
+}
+
+srcv() {
+    local env_names
+    declare -a env_names=(
+        "venv"
+        "env"
+    )
+    for env_name in $env_names; do
+        if [ -d $env_name ]; then
+            source ./$env_name/bin/activate
+            break
+        fi
+    done
 }
