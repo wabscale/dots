@@ -29,6 +29,8 @@ plugins=(
 #    python
 )
 
+source ~/dots/zsh/.env_vars
+
 if [ "`hostname`" = "kalima" ]; then
     cat ~/dots/zsh/kalima | lolcat
 else
