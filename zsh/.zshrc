@@ -32,7 +32,9 @@ plugins=(
 if [ "`hostname`" = "kalima" ]; then
     cat ~/dots/zsh/kalima | lolcat
 else
-    ~/dots/bin/art36 $(cat /etc/hostname)
+    if [ "$SKIP_BANNER" != "true" ]; then
+        ~/dots/bin/art36 $(cat /etc/hostname)
+    fi
 fi
 
 #local check_script sources
