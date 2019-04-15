@@ -31,8 +31,8 @@ plugins=(
 
 source ~/dots/zsh/.env_vars
 
-if [ "`hostname`" = "kalima" ]; then
-    cat ~/dots/zsh/kalima | lolcat
+if [ -f $HOME/dots/zsh/hostname ]; then
+    cat $HOME/dots/zsh/hostname | lolcat
 else
     if [ $SKIP_BANNER != true ]; then
         ~/dots/bin/art36 $(cat /etc/hostname)
