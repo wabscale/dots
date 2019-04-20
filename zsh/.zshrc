@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 #     startx
 # fi
@@ -41,8 +40,8 @@ fi
 
 #local check_script sources
 
-check_script="print \"$HOME/dots/bin\" in \"$PATH\""
-if [ "False" = "$(python2 -c $check_script)" ]; then
+check_script="print(\"$HOME/dots/bin\" in \"$PATH\")"
+if [ "False" = "$(python3 -c $check_script)" ]; then
     export PATH=$HOME/dots/bin:$PATH
     export PATH=$HOME/.gem/ruby/2.5.0/bin:$PATH
 fi
