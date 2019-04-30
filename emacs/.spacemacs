@@ -366,7 +366,22 @@ you should place your code here."
             (lambda ()
               (setq python-indent-offset 4)))
   (add-to-list 'auto-mode-alist '("\\.html\\'" . jinja2-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   js-indent-level 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
   (setq vc-follow-symlinks nil)
   (defun fmt ()
     "indent whole buffer"
@@ -374,6 +389,7 @@ you should place your code here."
     (delete-trailing-whitespace)
     (indent-region (point-min) (point-max) nil)
     (untabify (point-min) (point-max)))
+  (defun emmet-mode (n))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
