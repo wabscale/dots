@@ -365,6 +365,7 @@ you should place your code here."
   (add-hook 'python-mode-hook
             (lambda ()
               (setq python-indent-offset 4)))
+  (advice-add 'web-beautify-reload :after #'react-mode)
   (add-to-list 'auto-mode-alist '("\\.html\\'" . jinja2-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
