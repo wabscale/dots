@@ -118,6 +118,7 @@ bindsym $mod+Shift+b exec /root/dots/bin/disp right
 bindsym $mod+Shift+t exec /root/dots/bin/starttor
 bindsym $mod+Shift+m exec /opt/minecraft/minecraft
 bindsym $mod+Shift+p exec /opt/pycharm/pycharm
+bindsym $mod+Shift+j exec webstorm
 bindsym $mod+l exec /root/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+d exec dmenu_run
