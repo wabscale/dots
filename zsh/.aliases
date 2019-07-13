@@ -20,7 +20,7 @@ else
 fi
 
 # grep related
-alias grep='grep -n --color'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules} -n'
 
 # git
 alias gits='git status -s'
@@ -66,11 +66,12 @@ alias dshell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm debia
 alias ashell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm alpine:3.9'
 
 # docker-compose
-alias drc='docker-compose'
-alias dbuild='docker-compose build'
-alias dup='docker-compose up'
-alias ddown='docker-compose down'
-alias dkill='docker-compose kill'
+alias dc='docker-compose'
+alias dcb='docker-compose build'
+alias dcu='docker-compose up'
+alias dcr='docker-compose run'
+alias dcd='docker-compose down'
+alias dck='docker-compose kill'
 
 # misc.
 alias rsync='rsync -r -v --progress -e ssh'
