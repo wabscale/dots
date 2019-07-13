@@ -98,7 +98,16 @@ done
 if [ -f ~/.lastdir ]; then
    cd $(cat ~/.lastdir)
 fi
-
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+for i in $sourcefiles; do
+    if [ -e $HOME/dots/zsh/$i ]; then
+        source $HOME/dots/zsh/$i
+    fi
+done
+
+if [ -d ~/.asdf ]; then
+    source ~/.asdf/asdf.sh
+    source ~/.asdf/completions/asdf.bash
+fi
