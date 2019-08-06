@@ -1,0 +1,15 @@
+import json
+import os
+from os import listdir as ls
+
+def jload(filename):
+    with open(filename) as f:
+        return json.loads(f.read())
+
+def jdump(data, filename, indent=None):
+    with open(filename, 'w') as f:
+        f.write(json.dumps(data, indent=indent))
+
+
+q=exit
+%alias_magic l ls -p "-alh"
