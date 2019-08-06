@@ -30,12 +30,9 @@ plugins=(
 
 source ~/dots/zsh/.env_vars
 
-if [ -f $HOME/dots/zsh/hostname ]; then
-    cat $HOME/dots/zsh/hostname | lolcat
-else
-    if [ $SKIP_BANNER != true ]; then
-        ~/dots/bin/art36 $(cat /etc/hostname)
-    fi
+BANNER_FILE=$(echo $HOME/dots/zsh/`hostname` | awk '{print tolower($0)}')
+if [ -f ${BANNER_FILE} ]; then
+    cat ${BANNER_FILE} | lolcat
 fi
 
 #local check_script sources

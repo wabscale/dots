@@ -4,22 +4,12 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
-# polybar -c /root/.config/polybar/top example &
-# polybar -c /root/.config/polybar/bottom bottom &
+POLYBAR_HOME=~/.config/polybar
 
-polybar -c /root/.config/polybar/prmsrswt white &
-
-if [ -n "$(xrandr | grep DP2\ connected)" ]; then
-    polybar -c /root/.config/polybar/prmsrswt.monitor white &
-    # polybar -c /root/.config/polybar/bottom.monitor bottom &
-    # polybar -c /root/.config/polybar/top.monitor example &
-fi
-
-if [ -n "$(xrandr | grep DP1\ connected)" ]; then
-    polybar -c /root/.config/polybar/prmsrswt.monitor1 white &
-    # polybar -c /root/.config/polybar/bottom.monitor bottom &
-    # polybar -c /root/.config/polybar/top.monitor example &
-fi
+for i in `xrandr | nice grep ' connected' | awk '{print $1}'`; do
+    echo $i
+    DISP="${i}" polybar -c ${POLYBAR_HOME}/prmsrswt.conf white &
+done
 
 
 echo "bars launched..."
