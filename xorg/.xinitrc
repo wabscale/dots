@@ -4,7 +4,7 @@ cd ~
     xrdb ~/.Xresources
     ~/.fehbg &
     compton &> /dev/null &
-    emacs --insecure --daemon &
+    # emacs --insecure --daemon &
     #if [ "`hostname`" = "Ra" ]; then
     #    xrandr --setprovideroutputsource modesetting NVIDIA-0
     #    xrandr --auto

@@ -28,7 +28,9 @@ plugins=(
 #    python
 )
 
-source ~/dots/zsh/.env_vars
+if [ -f ~/dots/zsh/.env ]; then
+    source ~/dots/zsh/.env_vars
+fi
 
 BANNER_FILE=$(echo $HOME/dots/zsh/`hostname` | awk '{print tolower($0)}')
 if [ -f ${BANNER_FILE} ]; then
