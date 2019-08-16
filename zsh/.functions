@@ -153,21 +153,6 @@ dockerclean() {
     docker rmi `docker image list -q`
 }
 
-
-# pipr() { # dangerous
-#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
-#         echo $dep
-#         pip uninstall $dep
-#     done
-# }
-
-# pip3r() {
-#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
-#         echo $dep
-#         pip uninstall $dep
-#     done
-# }
-
 trizen() {
     local packages mode
     mode=$1
@@ -187,4 +172,82 @@ srcv() {
             break
         fi
     done
+}
+
+
+start() {
+    case "$1" in
+        "d")
+            echo "starting docker..."
+            systemctl start docker
+            ;;
+        "e")
+            echo "starting spacemacs..."
+            emacs --daemon --insecure &> /dev/null
+            ;;
+        "n")
+            interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
+            echo "starting netctl-auto@${interface}.service..."
+            systemctl start netctl-auto@${interface}.service
+            dhcpcd -N ${interface}
+            ;;
+        *)
+            declare -A services=(
+                ["e"]="emacs"
+                ["d"]="docker"
+                ["n"]="netctl"
+            )
+            echo "Plz specify argument ${services}"
+            ;;
+    esac
+}
+
+
+stop() {
+    case "$1" in
+        "d")
+            echo "stopping docker..."
+            systemctl stop docker
+            ;;
+        "e")
+            echo "stopping spacemacs..."
+            killall emacs
+            ;;
+        "n")
+            interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
+            echo "stopping netctl-auto@${interface}.service..."
+            systemctl stop netctl-auto@${interface}.service
+            ;;
+
+        *)
+            declare -A services=(
+                ["e"]="emacs"
+                ["d"]="docker"
+                ["n"]="netctl"
+            )
+            echo "Plz specify argument ${services}"
+            ;;
+    esac
+}
+
+
+restart() {
+    service="${1}"
+    declare -A services=(
+        ["e"]="emacs"
+        ["d"]="docker"
+        ["n"]="netctl"
+    )
+
+    if [ -z "${services[${service}]}" ]; then
+        echo "select service plz ${services}"
+        exit 1
+    fi
+
+    echo "restarting ${services[$service]}..."
+
+    {
+      stop "${service}"
+      start "${service}"
+    } &> /dev/null
 }
