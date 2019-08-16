@@ -57,17 +57,12 @@ alias cpt='ccrypt -v'
 # xclip
 alias xclip='xclip -selection c'
 
-# emacs
-alias estop='killall -q emacs'
-alias estart='killall -q emacs; emacs --insecure -nw --daemon &> /dev/null'
 
 # docker
 alias dr='docker'
 alias dps='docker ps'
 alias drmi='docker rmi'
 alias dls='docker image ls'
-alias dstop='systemctl stop docker'
-alias dstart='systemctl start docker'
 alias dshell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm debian:stretch'
 alias ashell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm alpine:3.9'
 

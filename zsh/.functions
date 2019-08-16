@@ -183,7 +183,7 @@ start() {
             ;;
         "e")
             echo "starting spacemacs..."
-            emacs --daemon --insecure &> /dev/null
+            emacs --daemon -nw --insecure &> /dev/null
             ;;
         "n")
             interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
