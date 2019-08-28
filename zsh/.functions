@@ -189,7 +189,6 @@ start() {
             interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
             echo "starting netctl-auto@${interface}.service..."
             systemctl start netctl-auto@${interface}.service
-            dhcpcd -N ${interface}
             ;;
         *)
             declare -A services=(
