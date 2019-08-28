@@ -1,5 +1,15 @@
 #!/bin/bash
 
+MONITOR=$(xrandr | nice grep ' connected ' | awk '{print $1}' | tail -n 1)
+NATIVE=$(xrandr | nice grep ' connected ' | awk '{print $1}' | head -n 1)
+
+
+reload() {
+    /root/.fehbg
+    /root/dots/config/polybar/start.sh
+}
+
+trap reload EXIT
 
 case "$1" in
     left)
@@ -10,6 +20,10 @@ case "$1" in
         ;;
     mirror)
         SIDE="--reflect"
+        ;;
+    off)
+        xrandr --output ${MONITOR} --off
+        exit 0
         ;;
     *)
         SIDE="--right-of"
@@ -25,12 +39,5 @@ case "$2" in
         ;;
 esac
 
-if [ -n "`xrandr | grep DP1\ connected`" ]; then
-    xrandr --output DP1 ${ROTATE} --auto ${SIDE} eDP1
-fi
-if [ -n "`xrandr | grep DP2\ connected`" ]; then
-    xrandr --output DP2 ${ROTATE} --auto ${SIDE} eDP1
-fi
+xrandr --output ${MONITOR} ${ROTATE} --auto ${SIDE} ${NATIVE}
 
-/root/.fehbg
-/root/dots/config/polybar/start.sh
