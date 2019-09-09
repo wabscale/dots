@@ -213,7 +213,7 @@ stop() {
             killall emacs
             ;;
         "n")
-            interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
+            interface=`ip addr | awk '{ print $2 }' | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
             echo "stopping netctl-auto@${interface}.service..."
             systemctl stop netctl-auto@${interface}.service
             ;;
