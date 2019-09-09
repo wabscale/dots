@@ -175,6 +175,22 @@ srcv() {
 }
 
 
+# pipr() { # dangerous
+#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+#         echo $dep
+#         pip uninstall $dep
+#     done
+# }
+
+# pip3r() {
+#     for dep in $(pip show $1 | nice grep Requires | sed 's/Requires: //g; s/,//g'); do
+#         echo $dep
+#         pip uninstall $dep
+#     done
+# }
+
+
+
 start() {
     case "$1" in
         "d")
@@ -189,6 +205,9 @@ start() {
             interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
             echo "starting netctl-auto@${interface}.service..."
             systemctl start netctl-auto@${interface}.service
+            ;;
+        "db")
+            /opt/dockerfiles/mariadb/start
             ;;
         *)
             declare -A services=(
@@ -217,7 +236,9 @@ stop() {
             echo "stopping netctl-auto@${interface}.service..."
             systemctl stop netctl-auto@${interface}.service
             ;;
-
+        "db")
+            /opt/dockerfiles/mariadb/stop
+            ;;
         *)
             declare -A services=(
                 ["e"]="emacs"
@@ -236,6 +257,7 @@ restart() {
         ["e"]="emacs"
         ["d"]="docker"
         ["n"]="netctl"
+        ["db"]="mariadb"
     )
 
     if [ -z "${services[${service}]}" ]; then

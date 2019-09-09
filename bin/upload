@@ -23,8 +23,9 @@ def shell(cmd):
 def parse_args():
     parser=ArgumentParser('command to quickly scp files onto servers\nservers must be defined in ~/.ssh/config')
     parser.add_argument('--pack', dest='pack', action='store_true', help='pack files into .tgz archive before uploading')
-    # parser.add_argument('--safe', dest='safe', action='store_true', help='do not check to see if file already exists on server')
+    parser.add_argument('-o', '--out', default='~/uploads/', help='upload output directory')
     # parser.add_argument('--hash', dest='hash', action='store_true', help='hash the filename to ensure that nothing is overwritten on server')
+    # parser.add_argument('--safe', dest='safe', action='store_true', help='do not check to see if file already exists on server')
     parser.add_argument('server', nargs=1, help='name of server that is defined in ssh config file')
     parser.add_argument('files', nargs='*', help='files to be uploaded')
     return parser.parse_args()
@@ -33,9 +34,10 @@ def upload(f):
     """
     does scp shell
     """
-    cmd = 'nice scp -r {f} {server}:~/uploads/'.format(
+    cmd = 'nice scp -r {f} {server}:{out}'.format(
         server=args.server,
-        f=f
+        f=f,
+        out=args.out,
     )
     os.system(cmd)
 
