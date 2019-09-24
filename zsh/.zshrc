@@ -39,11 +39,16 @@ fi
 
 #local check_script sources
 
-check_script="print(\"$HOME/dots/bin\" in \"$PATH\")"
-if [ "False" = "$(python3 -c $check_script)" ]; then
-    export PATH=$HOME/dots/bin:$PATH
-    export PATH=$HOME/.gem/ruby/2.5.0/bin:$PATH
-fi
+include_paths=(
+    "$HOME/dots/bin"
+    "$HOME/.gem/ruby/2.6.0/bin"
+)
+
+for p in ${include_paths[@]}; do
+    if ! echo $PATH | grep $p &> /dev/null; then
+        export PATH=$p:$PATH
+    fi
+done
 
 
 rm_crap() {
@@ -52,6 +57,7 @@ rm_crap() {
     declare -a crap=(
         ".zcompdump"
         ".archey3.cfg"
+        ".nv"
         # ".zsh_history"
         # ".zcompdump"
         ".mysql_history"
