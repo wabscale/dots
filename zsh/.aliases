@@ -4,6 +4,7 @@
 alias cp='cp -v'
 alias mv='mv -v'
 alias rmr='rm -r'
+alias rmrf='rm -rf'
 alias cpr='cp -r'
 alias scp='scp -v'
 alias t='tree -aCFh -I .git'
