@@ -1,5 +1,13 @@
 #!/bin/sh
 
+"
+Quick setup script for https://gitlab.com/b1g_J/dots
+This will install the my zsh environment on debian or centOS machines.
+"
+
+# To install:
+# curl https://f.bigj.dev/f/qs.sh | sh
+
 set -e
 
 if which apt-get; then
@@ -25,3 +33,4 @@ echo "export TERM=xterm-256color" >> ~/dots/zsh/.env_vars
 echo "export ZSH_THEME=gnzh" >> ~/dots/zsh/.env_vars
 echo "export SKIP_BANNER=true" >> ~/dots/zsh/.env_vars
 
+chsh -s $(which zsh)
