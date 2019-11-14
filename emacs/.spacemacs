@@ -73,6 +73,7 @@ values."
      dockerfile-mode
      docker-compose-mode
      jinja2-mode
+     multiple-cursors
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -395,6 +396,7 @@ you should place your code here."
     (untabify (point-min) (point-max)))
   (defun emmet-mode (n))
   (load "/usr/share/clang/clang-format.el")
+  (global-set-key (kbd "C-c m c") 'mc/edit-lines)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

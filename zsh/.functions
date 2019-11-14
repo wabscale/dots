@@ -13,7 +13,7 @@ o() {
     fi
 }
 
-gitc() { # git commit 
+gitc() { # git commit
     MSG="$@"
     git commit -m "$MSG"
 }
@@ -82,8 +82,8 @@ c() {
 
 
 py() {
-     A="$(@)"
-     /usr/bin/python2 -c "print $A";
+    A="$(@)"
+    /usr/bin/python2 -c "print $A";
 }
 
 pack() {
@@ -110,7 +110,7 @@ du() {
     if [ 0 = $# ]; then
         nice du -h -d 0 $(pwd)
     else
-        for i in $@; do 
+        for i in $@; do
             nice du -h -d 0 $i
         done
     fi
@@ -192,83 +192,89 @@ srcv() {
 
 
 start() {
-    case "$1" in
-        "d")
-            echo "starting docker..."
-            systemctl start docker
-            ;;
-        "e")
-            echo "starting spacemacs..."
-            emacs --daemon -nw --insecure &> /dev/null
-            ;;
-        "n")
-            interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
-            echo "starting netctl-auto@${interface}.service..."
-            systemctl start netctl-auto@${interface}.service
-            ;;
-        "db")
-            /opt/dockerfiles/mariadb/start
-            ;;
-        *)
-            declare -A services=(
-                ["e"]="emacs"
-                ["d"]="docker"
-                ["n"]="netctl"
-            )
-            echo "Plz specify argument ${services}"
-            ;;
-    esac
+    for i in "$@"; do
+        case "$i" in
+            "d")
+                echo "starting docker..."
+                systemctl start docker
+                ;;
+            "e")
+                echo "starting spacemacs..."
+                emacs --daemon -nw --insecure &> /dev/null
+                ;;
+            "n")
+                interface=`ip addr | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
+                echo "starting netctl-auto@${interface}.service..."
+                systemctl start netctl-auto@${interface}.service
+                ;;
+            "db")
+                /opt/dockerfiles/mariadb/start
+                ;;
+            *)
+                declare -A services=(
+                    ["e"]="emacs"
+                    ["d"]="docker"
+                    ["n"]="netctl"
+                )
+                echo "Plz specify argument ${services}"
+                ;;
+        esac
+    done
 }
 
 
 stop() {
-    case "$1" in
-        "d")
-            echo "stopping docker..."
-            systemctl stop docker
-            ;;
-        "e")
-            echo "stopping spacemacs..."
-            killall emacs
-            ;;
-        "n")
-            interface=`ip addr | awk '{ print $2 }' | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
-            echo "stopping netctl-auto@${interface}.service..."
-            systemctl stop netctl-auto@${interface}.service
-            ;;
-        "db")
-            /opt/dockerfiles/mariadb/stop
-            ;;
-        *)
-            declare -A services=(
-                ["e"]="emacs"
-                ["d"]="docker"
-                ["n"]="netctl"
-            )
-            echo "Plz specify argument ${services}"
-            ;;
-    esac
+    for i in "$@"; do
+        case "$i" in
+            "d")
+                echo "stopping docker..."
+                systemctl stop docker
+                ;;
+            "e")
+                echo "stopping spacemacs..."
+                killall emacs
+                ;;
+            "n")
+                interface=`ip addr | awk '{ print $2 }' | nice grep -Po 'wl([A-Za-z]|[0-9])*'`
+                echo "stopping netctl-auto@${interface}.service..."
+                systemctl stop netctl-auto@${interface}.service
+                ;;
+            "db")
+                /opt/dockerfiles/mariadb/stop
+                ;;
+            *)
+                declare -A services=(
+                    ["e"]="emacs"
+                    ["d"]="docker"
+                    ["n"]="netctl"
+                )
+                echo "Plz specify argument ${services}"
+                ;;
+        esac
+    done
 }
 
 
 restart() {
-    service="${1}"
-    declare -A services=(
-        ["e"]="emacs"
-        ["d"]="docker"
-        ["n"]="netctl"
-        ["db"]="mariadb"
-    )
+    for i in "$@"; do
+        service="${i}"
+        declare -A services=(
+            ["e"]="emacs"
+            ["d"]="docker"
+            ["n"]="netctl"
+            ["db"]="mariadb"
+        )
 
-    if [ -z "${services[${service}]}" ]; then
-        echo "select service plz ${services}"
-        exit 1
-    fi
+        if [ -z "${services[${service}]}" ]; then
+            echo "select service plz ${services}"
+            exit 1
+        fi
 
-    echo "restarting ${services[$service]}..."
+        echo "restarting ${services[$service]}..."
 
-    {
-      stop "${service}"
-      start "${service}"
-    } &> /dev/null
+        {
+            stop "${service}"
+            start "${service}"
+        } &> /dev/null
+    done
 }

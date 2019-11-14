@@ -5,8 +5,8 @@ case "$1" in
     "osiris")
         openvpn --config /etc/openvpn/client/osiris.conf --daemon && echo "connnected to osiris vpn"
         ;;
-    "ois")
-        openvpn --config /etc/openvpn/client/ois.conf --daemon && echo "connected to ois vpn"
+    "nyu")
+        openvpn --config /etc/openvpn/client/nyu.conf --daemon && echo "connected to ois vpn"
         ;;
     *)
         echo ""
