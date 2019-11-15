@@ -24,6 +24,7 @@ plugins=(
     battery
     docker
     docker-compose
+    zsh-autosuggestions
 #    web-search
 #    python
 )
