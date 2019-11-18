@@ -3,7 +3,7 @@ cd ~
 {
     xrdb ~/.Xresources
     ~/.fehbg &
-    compton &> /dev/null &
+    picom &> /dev/null &
     if ip addr | grep enp0s20f0u5u4; then
         dhcpcd -N enp0s20f0u5u4 &
     fi
