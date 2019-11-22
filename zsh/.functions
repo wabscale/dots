@@ -148,8 +148,8 @@ dcleanv() {
 
 dclean() {
     # https://lebkowski.name/docker-volumes/
-    dockerkill
-    dockercleanv
+    dkill
+    dcleanv
     docker rmi `docker image list -q`
 }
 
