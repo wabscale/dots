@@ -59,6 +59,7 @@ rm_crap() {
         ".zcompdump"
         ".archey3.cfg"
         ".nv"
+        ".grip"
         # ".zsh_history"
         # ".zcompdump"
         ".mysql_history"
