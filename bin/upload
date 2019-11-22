@@ -35,7 +35,7 @@ def upload(f):
     does scp shell
     """
     cmd = 'nice scp -r {f} {server}:{out}'.format(
-        server=args.server[0],
+        server=args.server[0] if isinstance(args.server, list) else args.server,
         f=f,
         out=args.out,
     )

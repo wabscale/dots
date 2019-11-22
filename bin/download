@@ -28,7 +28,7 @@ def download(f):
     else:
         cmd='nice scp -r {server}:{f} ./'
     cmd = cmd.format(
-        server=args.server[0],
+        server=args.server[0] if isinstance(args.server, list) else args.server,
         f=f
     )
     os.system(cmd)
