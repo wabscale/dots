@@ -118,3 +118,5 @@ if [ -d ~/.asdf ]; then
     source ~/.asdf/asdf.sh
     source ~/.asdf/completions/asdf.bash
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
