@@ -35,9 +35,18 @@ case "$2" in
         ROTATE="--rotate right"
         ;;
     *)
-        ROTATE=""
+        ROTATE="--rotate normal"
         ;;
 esac
 
-xrandr --output ${MONITOR} ${ROTATE} --auto ${SIDE} ${NATIVE}
+case "${MONITOR}" in
+    "HDMI-0")
+        OPTIONS="-r 144 --mode 2560x1440"
+        ;;
+    *)
+        OPTIONS=""
+        ;;
+esac
+
+xrandr --output ${MONITOR} ${ROTATE} ${OPTIONS} --auto ${SIDE} ${NATIVE}
 
