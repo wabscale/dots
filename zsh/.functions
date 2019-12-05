@@ -278,3 +278,30 @@ restart() {
         } &> /dev/null
     done
 }
+
+
+build() {
+    if (( $# != 1 )); then
+        echo 'build <docker image>'
+        return 1
+    fi
+
+    if [ -z "${DOCKERFILES_PATH}" ]; then
+        echo "DOCKERFILES_PATH not set"
+        return 1
+    fi
+
+    yaml2json() {
+        ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))' $@
+    }
+
+    for dc_file in $(find "${DOCKERFILES_PATH}" -name 'docker-compose.yml'); do
+        for service in $(yaml2json "${dc_file}" | jq '.services | keys[]' -r); do
+            if [ "${service}" = "${1}" ]; then
+                echo "building ${dc_file} ${1}"
+                docker-compose -f "${dc_file}" build "${service}"
+                return 0
+            fi
+        done
+    done
+}
