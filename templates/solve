@@ -13,8 +13,12 @@ args=parse_args()
 context.log_level='DEBUG' if not args.quite else 'WARN'
 context.terminal=['/usr/bin/termite', '-e']
 
+binary=''
+
+e=ELF(binary)
+
 if not args.remote:
-    p=process('')
+    p=process(binary)
     if args.gdb:
         gdb.attach(p)
 else:
