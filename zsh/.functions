@@ -267,7 +267,7 @@ restart() {
 
         if [ -z "${services[${service}]}" ]; then
             echo "select service plz ${services}"
-            exit 1
+            return 1
         fi
 
         echo "restarting ${services[$service]}..."
