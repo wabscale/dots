@@ -19,7 +19,7 @@ case "$1" in
         SIDE="--right-of"
         ;;
     mirror)
-        SIDE="--reflect"
+        xrandr --output ${MONITOR} --auto --reflect normal --rotate normal
         ;;
     off)
         xrandr --output ${MONITOR} --off
@@ -48,5 +48,6 @@ case "${MONITOR}" in
         ;;
 esac
 
+set -x
 xrandr --output ${MONITOR} ${ROTATE} ${OPTIONS} --auto ${SIDE} ${NATIVE}
 

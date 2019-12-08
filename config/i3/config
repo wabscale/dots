@@ -113,11 +113,11 @@ bindsym $mod+Shift+s exec scrot '%s.png' -e 'mv $f ~/shots/'
 bindsym $mod+Shift+w exec termite --exec=/usr/bin/wifi-menu
 bindsym $mod+Shift+o exec disp off
 bindsym $mod+Shift+d exec disp right rotate
+bindsym $mod+Shift+m exec disp mirror
 bindsym $mod+Shift+b exec disp right
 bindsym $mod+Shift+v exec disp left
 bindsym $mod+Shift+x exec xrandr --auto
 bindsym $mod+Shift+t exec /root/dots/bin/starttor
-bindsym $mod+Shift+m exec /opt/minecraft/minecraft
 bindsym $mod+Shift+j exec webstorm
 bindsym $mod+l exec /root/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
