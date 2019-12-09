@@ -88,7 +88,7 @@ alias de=deactivate
 alias startx=xinit # don't ask
 alias top=htop
 alias wh=which
-alias cl=clear
+alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
 alias p=ccat
 alias q=exit
 
