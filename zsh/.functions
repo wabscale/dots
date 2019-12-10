@@ -157,7 +157,7 @@ trizen() {
     local packages mode
     mode=$1
     packages=$@
-    if [ "${USER}" != "root" ]; then
+    if [ "${USER}" == "root" ]; then
         su jc -c "nice trizen ${mode} ${packages}"
     else
         nice trizen "${mode}" "${packages}"
