@@ -157,7 +157,11 @@ trizen() {
     local packages mode
     mode=$1
     packages=$@
-    su jc -c "nice trizen ${mode} ${packages}"
+    if [ "${USER}" != "root" ]; then
+        su jc -c "nice trizen ${mode} ${packages}"
+    else
+        nice trizen "${mode}" "${packages}"
+    fi
 }
 
 srcv() {
