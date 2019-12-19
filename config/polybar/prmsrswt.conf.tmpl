@@ -304,12 +304,15 @@ ramp-capacity-4 = 
 [module/wlan1]
 type = internal/network
 
-interface = wlo1
+interface = ${env:INTERFACE:"wlo1"}
 
 interval = 5
 
-label-connected =  %essid% %local_ip%
-label-disconnected =  Not Connected
+;wireless label-connected =  %essid% %local_ip%
+;wireless label-disconnected =  Not Connected
+
+;wired label-connected =  %local_ip%
+;wired label-disconnected =  Not Connected
 
 
 [module/wlan2]
