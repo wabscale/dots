@@ -30,8 +30,14 @@ function mygit() {
 
 function retcode() {}
 
+mydocker() {
+    if [ -f ./docker-compose.yml ] || [ -f ./docker-compose.yaml ] || [ -f ./Dockerfile ]; then
+       echo "%{$fg[blue]%} %{$reset_color%}"
+    fi
+}
+
 # alternate prompt with git & hg
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}<$(mygit)$(hg_prompt_info)>%{$reset_color%} 
+PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}<$(mygit)$(hg_prompt_info)>%{$reset_color%} $(mydocker) 
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(retcode)%{$fg_bold[blue]%}] %{$fg_bold[red]%}$%{$reset_color%} '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
