@@ -4,7 +4,7 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
-POLYBAR_HOME=~/.config/polybar
+cd ~/.config/polybar
 
 export WIRED=$(ip -br link show | awk '{print $1}' | nice grep 'enp.*$' -oP)
 export WIRELESS=$(ip -br link show | awk '{print $1}' | nice grep 'w.*$' -oP)
@@ -35,7 +35,7 @@ fi
 
 for i in `xrandr | nice grep ' connected' | awk '{print $1}'`; do
     echo $i
-    DISP="${i}" polybar -c ${POLYBAR_HOME}/prmsrswt.conf white &
+    DISP="${i}" polybar -c prmsrswt.conf white &
 done
 
 echo "bars launched..."
