@@ -41,7 +41,9 @@ esac
 
 case "${MONITOR}" in
     "HDMI-0")
-        OPTIONS="-r 144 --mode 2560x1440"
+        if xrandr | grep '2560x1440' | grep -P '144|143' &> /dev/null; then
+            OPTIONS="-r 144 --mode 2560x1440"
+        fi
         ;;
     *)
         OPTIONS=""
