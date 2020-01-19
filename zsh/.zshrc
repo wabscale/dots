@@ -43,6 +43,8 @@ fi
 include_paths=(
     "$HOME/dots/bin"
     "$HOME/.gem/ruby/2.6.0/bin"
+    "$HOME/.yarn/bin"
+    "$HOME/.config/yarn/global/node_modules/.bin"
 )
 
 for p in ${include_paths[@]}; do
@@ -120,4 +122,3 @@ if [ -d ~/.asdf ]; then
     source ~/.asdf/completions/asdf.bash
 fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
