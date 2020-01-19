@@ -25,6 +25,7 @@ plugins=(
     docker
     docker-compose
     zsh-autosuggestions
+    zsh-syntax-highlighting
 #    web-search
 #    python
 )
@@ -109,7 +110,6 @@ if [ -f ~/.lastdir ]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 for i in $sourcefiles; do
     if [ -e $HOME/dots/zsh/$i ]; then
