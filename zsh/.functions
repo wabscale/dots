@@ -285,9 +285,55 @@ restart() {
 
 
 build() {
-    if (( $# != 1 )); then
-        echo 'build <docker image>'
-        return 1
+    MAN="build [service(s) | ./directory/path | .]
+
+This tool will attempt to build the service(s) specified, or the images specified
+in the current directory. If no arguments are specified then the tool will attempt
+to build a docker-compose file, or dockerfile in the current directory. If a path is
+specified, then the script will attempt to build the compose file, or dockerfile in
+that directory.
+
+depends on jq and ruby
+
+eg:
+build
+build ./directory
+build webstorm goland"
+
+    if [ "-h" = "$1" ] || [ "--help" = "${1}" ]; then
+        echo "${MAN}"
+        return 0
+    fi
+
+    attempt_to_build() {
+        # Attempts to build the compose file,
+        # or the dockerfile in the specied directory
+        if [ -f ./${1}/docker-compose.yml ] || [ -f ./${1}/docker-compose.yaml ]; then
+            dc_file="$(ls docker-compose.y*ml | head -n 1)"
+            echo "running docker-compose -f ${1}/${dc_file} build --parallel" 1>&2
+            docker-compose -f ${1}/${dc_file} build --parallel
+            return 0
+        elif [ -f ${1}/Dockerfile ]; then
+            tag="$(basename $(pwd))"
+            echo "running docker build -f ${1}/Dockerfile -t ${tag} ." 1>&2
+            docker build -f ${1}/Dockerfile -t ${tag} .
+            return 0
+        else
+            return 1
+        fi
+    }
+
+    yaml2json() {
+        ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))' $@
+    }
+
+    if (( $# == 0 )); then
+        attempt_to_build .
+        ret_code="$?"
+        if (( ${ret_code} != 0 )); then
+            echo "unable to build ." 1>&2
+        fi
+        return ${ret_code}
     fi
 
     if [ -z "${DOCKERFILES_PATH}" ]; then
@@ -295,17 +341,31 @@ build() {
         return 1
     fi
 
-    yaml2json() {
-        ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))' $@
-    }
+    declare -A service_map
 
     for dc_file in $(find "${DOCKERFILES_PATH}" -name 'docker-compose.yml'); do
         for service in $(yaml2json "${dc_file}" | jq '.services | keys[]' -r); do
-            if [ "${service}" = "${1}" ]; then
-                echo "building ${dc_file} ${1}"
-                docker-compose -f "${dc_file}" build "${service}"
-                return 0
-            fi
+            service_map[${service}]="${dc_file}"
         done
     done
+
+    for arg in $@; do
+        if [ -d "${arg}" ]; then
+            attempt_to_build "${arg}"
+        elif [ -n "${service_map[${arg}]}" ]; then
+            echo "running docker-compose -f ${service_map[${arg}]} build ${arg}" 1>&2
+            docker-compose -f "${service_map[${arg}]}" build "${arg}"
+        fi
+    done
+}
+
+if alias md &> /dev/null; then
+    unalias md
+fi
+md() {
+    if (( $# == 0 )); then
+        pandoc README.md | lynx -stdin
+        return
+    fi
+    pandoc $1 | lynx -stdin
 }

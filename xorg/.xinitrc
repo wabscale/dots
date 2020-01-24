@@ -4,8 +4,8 @@ cd ~
     xrdb ~/.Xresources
     ~/.fehbg &
     picom &> /dev/null &
-    if ip addr | grep enp0s20f0u5u4; then
-        dhcpcd -N enp0s20f0u5u4 &
+    if ip addr | grep enp0s20f0u6u4; then
+        dhcpcd -N enp0s20f0u6u4 &
     fi
     # emacs --insecure --daemon &
     #if [ "`hostname`" = "Ra" ]; then
@@ -13,5 +13,6 @@ cd ~
     #    xrandr --auto
     #fi
 } &> /dev/null
-#primusrun i3
+#primusrn i3
+
 exec i3
