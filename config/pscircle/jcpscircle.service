@@ -4,7 +4,7 @@ After=suspend.target
 
 [Service]
 Environment=DISPLAY=:0,HOME=/root
-ExecStart=/root/dots/config/pscircle/feh-pscircle
+ExecStart=~/dots/config/pscircle/feh-pscircle
 
 [Install]
 WantedBy=suspend.target

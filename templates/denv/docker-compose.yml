@@ -6,4 +6,4 @@ services:
     image: denv
     container_name: denv
     volumes:
-      - "$PWD:/root/host"
+      - "$PWD:~/host"

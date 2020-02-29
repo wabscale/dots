@@ -70,8 +70,8 @@ alias dr='docker'
 alias dps='docker ps'
 alias drmi='docker rmi'
 alias dls='docker image ls'
-alias dshell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm debian:stretch'
-alias ashell='docker run -it -v `pwd`:/root/host --workdir /root/host --rm alpine:3.9'
+alias dshell='docker run -it -v `pwd`:~/host --workdir ~/host --rm debian:stretch'
+alias ashell='docker run -it -v `pwd`:~/host --workdir ~/host --rm alpine:3.9'
 
 # docker-compose
 alias dc='docker-compose'

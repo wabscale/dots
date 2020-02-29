@@ -5,8 +5,8 @@ NATIVE=$(xrandr | nice grep ' connected ' | awk '{print $1}' | head -n 1)
 
 
 reload() {
-    /root/.fehbg
-    /root/dots/config/polybar/start.sh
+    ~/.fehbg
+    ~/dots/config/polybar/start.sh
 }
 
 trap reload EXIT

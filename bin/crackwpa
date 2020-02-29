@@ -26,12 +26,12 @@ crackwpa()
     while [ -z "$(ls | grep out-01.cap)" ]; do
 	sleep 1
     done
-    #until aircrack-ng -w /root/Desktop/resources/rockyou.txt out-01.cap; do
+    #until aircrack-ng -w ~/Desktop/resources/rockyou.txt out-01.cap; do
 	#echo -n
     #done
     echo something
 
-    #aircrack-ng -w /root/Desktop/resources/rockyou.txt out-01.cap
+    #aircrack-ng -w ~/Desktop/resources/rockyou.txt out-01.cap
     
 }
 

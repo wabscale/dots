@@ -18,7 +18,7 @@ fi
 
 exc_new_window()
 {
-    #wd=/root/Desktop/resource/captures/
+    #wd=~/Desktop/resource/captures/
     gnome-terminal --command="$*" #--working-directory=$wd
 }
 
