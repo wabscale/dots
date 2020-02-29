@@ -11,13 +11,14 @@ alias t='tree -aCFh -I .git'
 
 # ls stuff
 if [ -z "$(uname -a | nice grep Linux)" ]; then
-    alias ll='ls -lh'
-    alias la='ls -a'
     alias l='ls -lhaF'
+    alias la='ls -a'
 else
     alias ll='ls --color=auto -l'
-    alias la='ls --color=auto -a'
-    alias l='ls --color=auto -aCFlh'
+    #alias la='ls --color=auto -a'
+    #alias l='ls --color=auto -aCFlh'
+    alias la='exa -abghliT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
+    alias l='exa -abghli --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
 fi
 
 # grep related
@@ -32,6 +33,8 @@ alias gitb='git branch'
 alias gitch='git checkout'
 alias gitcout='git checkout --'
 alias gitm='git merge'
+alias gitl='git log'
+alias gitre='git reset'
 alias gitsh='git push'
 alias gitll='git pull'
 alias gitssh='git push --set-upstream origin $(git branch --show-current)'
