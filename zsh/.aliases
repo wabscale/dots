@@ -17,8 +17,8 @@ else
     alias ll='ls --color=auto -l'
     #alias la='ls --color=auto -a'
     #alias l='ls --color=auto -aCFlh'
-    alias la='exa -abghliT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
-    alias l='exa -abghli --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
+    alias la='exa -abghlT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
+    alias l='exa -abghl --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
 fi
 
 # grep related
