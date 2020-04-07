@@ -369,3 +369,14 @@ md() {
     fi
     pandoc $1 | lynx -stdin
 }
+
+
+giti() {
+    echo >> .gitignore
+    for i in $@; do echo $i >> .gitignore; done
+}
+
+dockeri() {
+    echo >> .dockerignore
+    for i in $@; do echo $i >> .dockerignore; done
+}

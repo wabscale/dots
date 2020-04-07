@@ -82,19 +82,20 @@ alias dcd='docker-compose down'
 alias dck='docker-compose kill'
 
 # misc.
+alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
 alias rsync='rsync -r -v --progress -e ssh'
 alias src='unalias -a; source ~/.zshrc'
 alias erc='e ~/.zshrc; source ~/.zshrc'
 alias efunc='e ~/dots/zsh/.functions'
 alias ealias='e ~/dots/zsh/.aliases'
 alias base64='base64 -w 0'
+alias curl='curl --silent'
 alias cll='clear; l'
 alias ctl=systemctl
 alias de=deactivate
 alias startx=xinit # don't ask
 alias top=htop
 alias wh=which
-alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
 alias p=ccat
 alias q=exit
 

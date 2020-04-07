@@ -43,7 +43,7 @@ fi
 
 include_paths=(
     "$HOME/dots/bin"
-    "$HOME/.gem/ruby/2.6.0/bin"
+    "$HOME/.gem/ruby/2.7.0/bin"
     "$HOME/.yarn/bin"
     "$HOME/.config/yarn/global/node_modules/.bin"
 )
@@ -106,7 +106,7 @@ for i in $sourcefiles; do
 done
 
 if [ -f ~/.lastdir ]; then
-   cd $(cat ~/.lastdir)
+   cd "$(cat ~/.lastdir)"
 fi
 
 source $ZSH/oh-my-zsh.sh
