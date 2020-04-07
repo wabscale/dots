@@ -107,3 +107,6 @@ alias onoz='less /var/log/errors.log'
 alias plz='sudo $(fc -ln -1)'
 alias wtf='dmesg | less'
 alias gimme='touch'
+
+alias ghci='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell ghci'
+alias haskell='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell bash'
