@@ -5,7 +5,7 @@ I run arch linux with the i3-gap window manager, and polybar instead of i3status
 ![desktp image](./img/fin.png)
 
 
-I also run a whole lot of my desktop gui apps in docker containers, so check out my (dockerfiles)[https://gitlab.com/juanpunchman/dockerfiles] too.
+I also run a whole lot of my desktop gui apps in docker containers, so check out my [dockerfiles](https://gitlab.com/juanpunchman/dockerfiles) too.
 
 # dependencies
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
