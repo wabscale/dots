@@ -2,6 +2,8 @@
 
 killall -q polybar
 
+THEME=vista1nik
+
 while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
 cd ~/.config/polybar
@@ -11,16 +13,16 @@ export WIRELESS=$(ip -br link show | awk '{print $1}' | nice grep 'w.*$' -oP | h
 
 set_wired() {
     export INTERFACE="${WIRED}"
-    sed 's/;wired //g' prmsrswt.conf.tmpl > prmsrswt.conf
+    sed 's/;wired //g' ${THEME}.conf.tmpl > theme.conf
 }
 
 set_wireless() {
     export INTERFACE="${WIRELESS}"
-    sed 's/;wireless //g' prmsrswt.conf.tmpl > prmsrswt.conf
+    sed 's/;wireless //g' ${THEME}.conf.tmpl > theme.conf
 }
 
-if [ -f prmsrswt.conf ]; then
-    rm prmsrswt.conf
+if [ -f theme.conf ]; then
+    rm theme.conf
 fi
 
 if [ -n "${WIRED}" ]; then
@@ -35,7 +37,7 @@ fi
 
 for i in `xrandr | nice grep ' connected' | awk '{print $1}'`; do
     echo $i
-    DISP="${i}" polybar -c prmsrswt.conf white &
+    DISP="${i}" polybar -c theme.conf white &
 done
 
 echo "bars launched..."

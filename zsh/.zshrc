@@ -46,6 +46,7 @@ include_paths=(
     "$HOME/.gem/ruby/2.7.0/bin"
     "$HOME/.yarn/bin"
     "$HOME/.config/yarn/global/node_modules/.bin"
+    "$HOME/.cargo/bin"
 )
 
 for p in ${include_paths[@]}; do

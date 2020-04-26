@@ -380,3 +380,5 @@ dockeri() {
     echo >> .dockerignore
     for i in $@; do echo $i >> .dockerignore; done
 }
+
+ddg() { firefox "https://duckduckgo.com/?q=$(echo $@ | xargs)" }

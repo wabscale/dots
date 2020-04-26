@@ -372,6 +372,7 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.html\\'" . jinja2-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
   (setq-default
    ;; js2-mode
    js2-basic-offset 2

@@ -123,6 +123,7 @@ bindsym $mod+Shift+j exec webstorm
 bindsym $mod+l exec ~/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+d exec dmenu_run
+bindsym $mod+Shift+p exec pavucontrol
 
 
 for_window [class="^.*"] border pixel 0

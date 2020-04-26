@@ -39,7 +39,10 @@ function my_git_prompt() {
     STATUS=" $STATUS"
   fi
 
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(my_current_branch)$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg_bold[magenta]%}"
+  ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
+  BRANCH_STATUS="$(my_current_branch)%{$reset_color%}%{$fg_bold[white]%}@%{$reset_color%}$(git_prompt_short_sha)"
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX$BRANCH_STATUS$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 function my_current_branch() {
@@ -58,9 +61,18 @@ mydocker() {
     fi
 }
 
+function mygit() {
+    if [[ "$(git config --get oh-my-zsh.hide-status)" != "1" ]]; then
+        ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+            ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+        echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(git_prompt_short_sha)$(git_prompt_status)%{$fg_bold[blue]%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    fi
+}
+
 
 local ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%?%{$reset_color%}"
-PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[blue]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $(mydocker)\n[${ret_status}] %# '
+#PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[blue]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $(mydocker)\n[${ret_status}] %# '
+PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[white]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $(mydocker)\n[${ret_status}] %# '
 
 ZSH_THEME_PROMPT_RETURNCODE_PREFIX="%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_PREFIX=" $fg[white]‹ %{$fg_bold[yellow]%}"
