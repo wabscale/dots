@@ -2,7 +2,11 @@
 
 killall -q polybar
 
-THEME=vista1nik
+if [ "$(hostname)" = "aion" ]; then
+    THEME=vista1nik
+else
+    THEME=prmsrswt
+fi
 
 while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
