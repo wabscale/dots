@@ -343,7 +343,7 @@ build webstorm goland"
 
     declare -A service_map
 
-    for dc_file in $(find "${DOCKERFILES_PATH}" -name 'docker-compose.yml'); do
+    for dc_file in $(find "${DOCKERFILES_PATH}" -name 'docker-compose.yml' 2> /dev/null); do
         for service in $(yaml2json "${dc_file}" | jq '.services | keys[]' -r); do
             service_map[${service}]="${dc_file}"
         done

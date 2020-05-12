@@ -122,7 +122,7 @@ bindsym $mod+Shift+t exec ~/dots/bin/starttor
 bindsym $mod+Shift+j exec webstorm
 bindsym $mod+l exec ~/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run 
 bindsym $mod+Shift+p exec pavucontrol
 
 
