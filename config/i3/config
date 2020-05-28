@@ -25,9 +25,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -124,7 +124,7 @@ bindsym $mod+l exec ~/dots/bin/lock
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+d exec rofi -show run 
 bindsym $mod+Shift+p exec pavucontrol
-
+bindsym $mod+Shift+g exec firefox --new-window "https://www.reddit.com/"
 
 for_window [class="^.*"] border pixel 0
 gaps inner 5
