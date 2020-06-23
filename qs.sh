@@ -12,7 +12,7 @@ set -e
 
 if which apt-get; then
     sudo apt-get update
-    sudo apt-get install -y git zsh python3 python3-pip
+    sudo apt-get install -y git zsh python3 python3-pip emacs-nox
 elif which yum; then
     sudo yum update
     sudo yum install git zsh python3
@@ -33,5 +33,40 @@ ln -s ~/dots/zsh/.zshrc ~/.zshrc
 echo "export TERM=xterm-256color" >> ~/dots/zsh/.env_vars
 echo "export ZSH_THEME=gnzh" >> ~/dots/zsh/.env_vars
 echo "export SKIP_BANNER=true" >> ~/dots/zsh/.env_vars
+
+mkdr -p ~/.emacs.d
+>~/.emacs.d/init.el cat<<EOF
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (drag-stuff yaml-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+(require 'drag-stuff)
+(drag-stuff-mode t)
+(drag-stuff-global-mode t)
+(drag-stuff-define-keys)
+
+(setq make-backup-files nil)
+EOF
 
 chsh -s $(which zsh)
