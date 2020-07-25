@@ -34,7 +34,7 @@ echo "export TERM=xterm-256color" >> ~/dots/zsh/.env_vars
 echo "export ZSH_THEME=gnzh" >> ~/dots/zsh/.env_vars
 echo "export SKIP_BANNER=true" >> ~/dots/zsh/.env_vars
 
-mkdr -p ~/.emacs.d
+mkdir -p ~/.emacs.d
 >~/.emacs.d/init.el cat<<EOF
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -47,7 +47,7 @@ mkdr -p ~/.emacs.d
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (drag-stuff yaml-mode))))
+ '(package-selected-packages (quote (web-mode multi-web-mode drag-stuff yaml-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -58,8 +58,28 @@ mkdr -p ~/.emacs.d
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+
+(if (not (package-installed-p 'yaml-mode))
+    (progn
+      (package-refresh-contents)
+      (package-install 'yaml-mode)))
+
+(if (not (package-installed-p 'drag-stuff))
+    (progn
+      (package-refresh-contents)
+      (package-install 'drag-stuff)))
+
+(if (not (package-installed-p 'web-mode))
+    (progn
+      (package-refresh-contents)
+      (package-install 'web-mode)))
+
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+
 (require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\.yml\'" . yaml-mode))
 
 (require 'drag-stuff)
 (drag-stuff-mode t)
