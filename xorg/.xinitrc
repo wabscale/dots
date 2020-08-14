@@ -1,6 +1,7 @@
 
 cd ~
 {
+    #~/.screenlayout/dual.sh
     xrdb ~/.Xresources
     ~/.fehbg &
     picom &> /dev/null &
@@ -21,6 +22,11 @@ cd ~
 
 if xrandr | grep 'DP-4'; then
     xrandr --output DP-4 --mode 2560x1440 -r 144
+fi
+
+if which dunst; then
+    killall -9 dunst
+    dunst &
 fi
 
 exec i3
