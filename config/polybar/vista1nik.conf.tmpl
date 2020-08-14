@@ -257,17 +257,15 @@ interval = 1.0
 
 ; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
-date = %Y-%m-%d%
+date = %Y-%m-%d %r
 
 ; Optional time format
-time = %H:%M
 
 ; if `date-alt` or `time-alt` is defined, clicking
 ; the module will toggle between formats
-date-alt = %A, %d %B %Y
-time-alt = %H:%M:%S
+date-alt = %c
 
-label = %date% %time%
+label = %date%
 label-font = 0
 label-foreground = #D8DEE9
 
