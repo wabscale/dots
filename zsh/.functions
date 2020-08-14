@@ -155,13 +155,13 @@ dclean() {
 }
 
 trizen() {
-    local packages mode
-    mode=$1
-    packages=$@
+    # local packages mode
+    # mode=$1
+    # packages="$(echo $@ | tr ' ' '\n' | awk '{ c+=1; if (c>1) {print $0} }')"
     if [ "${USER}" = "root" ]; then
-        su jc -c "nice trizen ${mode} ${packages}"
+        su jc -c "nice trizen ${@}"
     else
-        nice trizen "${mode}" "${packages}"
+        nice trizen ${@}
     fi
 }
 
