@@ -151,6 +151,7 @@ dclean() {
     dkill
     dcleanv
     docker rmi `docker image list -q`
+    for i in $(docker image list -q); do docker rmi -f $i; done
 }
 
 trizen() {
@@ -382,3 +383,10 @@ dockeri() {
 }
 
 ddg() { firefox "https://duckduckgo.com/?q=$(echo $@ | xargs)" }
+
+kdash() {
+    echo https://127.0.0.1:8443
+    kubectl -n kubernetes-dashboard describe secret admin-user-token | nice grep -Po 'ey.*' | xclip
+    echo 'Copied token into clipboard...'
+    kubectl port-forward service/kubernetes-dashboard 8443:443 -n kubernetes-dashboard
+}

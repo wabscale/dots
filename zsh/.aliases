@@ -109,3 +109,7 @@ alias gimme='touch'
 
 alias ghci='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell ghci'
 alias haskell='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell bash'
+
+# Kube
+alias kctl=kubectl
+alias kctlf='kubectl apply -f'
