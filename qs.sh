@@ -10,12 +10,14 @@ This will install the my zsh environment on debian or centOS machines.
 
 set -e
 
-if which apt-get; then
+if which apt-get; then  # debian
     sudo apt-get update
     sudo apt-get install -y git zsh python3 python3-pip emacs-nox
-elif which yum; then
+elif which yum; then  # redhat
     sudo yum update
     sudo yum install git zsh python3
+elif which pacman; then  # arch
+    pacman -Syu git zsh python python-pip emacs-nox
 fi
 
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh; fi
@@ -28,7 +30,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.
 git clone https://gitlab.com/b1g_J/dots.git ~/dots
 
 ln -s ~/dots/zsh/.zshrc ~/.zshrc
-
 
 echo "export TERM=xterm-256color" >> ~/dots/zsh/.env_vars
 echo "export ZSH_THEME=gnzh" >> ~/dots/zsh/.env_vars
