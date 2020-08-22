@@ -17,7 +17,7 @@ elif which yum; then  # redhat
     sudo yum update
     sudo yum install git zsh python3
 elif which pacman; then  # arch
-    pacman -Syu git zsh python python-pip emacs-nox
+    sudo pacman -Syu git zsh python python-pip emacs-nox
 fi
 
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh; fi
