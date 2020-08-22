@@ -8,7 +8,7 @@ This will install the my zsh environment on debian or centOS machines.
 # To install:
 # curl https://f.bigj.dev/f/qs.sh | sh
 
-set -e
+set -ex
 
 if which apt-get; then  # debian
     sudo apt-get update
