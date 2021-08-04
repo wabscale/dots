@@ -1,7 +1,7 @@
 !------------------------------------------------------------------------------
 ! Color Settings
 *foreground: #C6A57B
-*background: #151515
+! *background: #151515
 
 !black
 *color0:     #101010
@@ -31,7 +31,7 @@
 !------------------------------------------------------------------------------
 ! URxvt Settings  
 urxvt*geometry:         80x21
-urxvt*font:             xft:Hack:size=11:antialias=true:autohint=true
+urxvt*font:             xft:Fira Code:size=11:antialias=true:autohint=true
 urxvt*scrollBar:        false
 urxvt.urgentOnBell:     true
 URxvt.perl-ext:

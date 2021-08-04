@@ -4,7 +4,8 @@ cd ~
     #~/.screenlayout/dual.sh
     xrdb ~/.Xresources
     ~/.fehbg &
-    picom &> /dev/null &
+    # picom -e 1 -i 1 -m 1 -I 1 --vsync -b
+    xcompmgr &
     if ip addr | grep enp0s20f0u6u4; then
         dhcpcd -N enp0s20f0u6u4 &
     fi
