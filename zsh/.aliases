@@ -34,9 +34,10 @@ alias gitd='git diff'
 alias gitg='git grep'
 alias gitb='git branch'
 alias gitch='git checkout'
+alias gitbch='git checkout -b'
 alias gitcout='git checkout --'
 alias gitm='git merge'
-alias gitl='git log'
+alias gitl='git log --graph --show-signature --date=iso-local'
 alias gitre='git reset'
 alias gitsh='git push'
 alias gitll='git pull --rebase'
@@ -45,6 +46,7 @@ alias gitsave='git config credential.helper store'
 alias gitbare='git config --bool core.bare true'
 alias gitrm='git rm'
 alias gitcl='git clone --recurse-submodules'
+alias gitr='git rebase'
 
 # for network tests
 alias wget='wget -v'
@@ -83,7 +85,7 @@ alias dck='docker-compose kill'
 
 # misc.
 alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
-alias rsync='rsync -r -v --progress -e ssh'
+# alias rsync='rsync -r -ah --progress'
 alias src='unalias -a; source ~/.zshrc'
 alias erc='e ~/.zshrc; source ~/.zshrc'
 alias efunc='e ~/dots/zsh/.functions'
@@ -92,7 +94,7 @@ alias base64='base64 -w 0'
 alias cll='clear; l'
 alias ctl='sudo systemctl'
 alias de=deactivate
-alias startx=xinit # don't ask
+# alias startx=xinit # don't ask
 alias top=htop
 alias wh=which
 alias p=ccat
@@ -107,6 +109,7 @@ alias onoz='less /var/log/errors.log'
 alias plz='sudo $(fc -ln -1)'
 alias wtf='dmesg | less'
 alias gimme='touch'
+alias yeet='sudo rm -rf'
 
 alias ghci='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell ghci'
 alias haskell='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id -g) haskell bash'
@@ -114,3 +117,5 @@ alias haskell='docker run --rm -it -w /opt/pl -v $(pwd):/opt/pl -u $(id -u):$(id
 # Kube
 alias kctl=kubectl
 alias kctlf='kubectl apply -f'
+alias mk=minikube
+alias mkctl='minikube kubectl --'

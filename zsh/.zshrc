@@ -72,6 +72,8 @@ rm_crap() {
         ".wget-hsts"
         ".pwntools-cache"
         "routersploit.log"
+        ".psql_history"
+        ".rediscli_history"
         ".msf4"
         ".install4j"
         ".rsf_history"
@@ -91,7 +93,7 @@ rm_crap() {
     done
 }
 
-rm_crap
+rm_crap &>/dev/null
 
 
 sourcefiles=(
@@ -133,11 +135,13 @@ function aconda() {
         eval "$__conda_setup"
     else
         if [ -f "/home/jc/.anaconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/jc/.anaconda3/etc/profile.d/conda.sh"
+# . "/home/jc/.anaconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
         else
-            export PATH="/home/jc/.anaconda3/bin:$PATH"
+# export PATH="/home/jc/.anaconda3/bin:$PATH"  # commented out by conda initialize
         fi
     fi
     unset __conda_setup
     # <<< conda initialize <<<
 }
+
+export PATH=$PATH:/home/jc/bin

@@ -390,3 +390,29 @@ kdash() {
     echo 'Copied token into clipboard...'
     kubectl port-forward service/kubernetes-dashboard 8443:443 -n kubernetes-dashboard
 }
+
+# cobc() {
+#     docker build -t cobc - <<EOF
+# FROM debian:stretch
+# RUN apt update && apt install -y open-cobol
+# VOLUME /build
+# WORKDIR /build
+# ENTRYPOINT cobc
+# EOF
+#     docker run \
+#            -it \
+#            --rm \
+#            -w /build \
+#            -v $(pwd):/build \
+#            --entrypoint cobc \
+#            -u $(id -u):$(id -g) \
+#            cobc $@
+# }
+
+
+fsync() {
+    ssh $1 "find $2 -type f" > /tmp/fsync
+    cat /tmp/fsync | sed 's/ /\\ /' | \
+        parallel --quote -j12 rsync --times --progress \
+                 --human-readable --relative ${1}:{} "${3:-.}"
+}
