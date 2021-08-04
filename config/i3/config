@@ -32,10 +32,6 @@ bindsym $mod+f fullscreen toggle
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -108,23 +104,25 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id ~/.config/polybar/start.sh
 exec_always --no-startup-id ~/.fehbg
 
-bindsym $mod+Shift+a exec termite --exec=sound
+bindsym $mod+Shift+o exec xrandr --output HDMI-0 --off --output DP-0 --off
 bindsym $mod+Shift+s exec scrot '%s.png' -e 'mv $f ~/shots/'
 bindsym $mod+Shift+w exec termite --exec=/usr/bin/wifi-menu
-bindsym $mod+Shift+o exec xrandr --output HDMI-0 --off --output DP-0 --off
-bindsym $mod+Shift+d exec disp right rotate
+bindsym $mod+Shift+g exec firefox --private-window
 bindsym $mod+Shift+n exec ~/.screenlayout/3b.sh
+bindsym $mod+Shift+a exec pavucontrol
+bindsym $mod+Shift+t exec ~/dots/bin/starttor
+bindsym $mod+Shift+d exec disp right rotate
+bindsym $mod+Shift+x exec xrandr --auto
 bindsym $mod+Shift+m exec disp mirror
 bindsym $mod+Shift+b exec disp right
 bindsym $mod+Shift+v exec disp left
-bindsym $mod+Shift+x exec xrandr --auto
-bindsym $mod+Shift+t exec ~/dots/bin/starttor
 bindsym $mod+Shift+j exec webstorm
-bindsym $mod+l exec ~/dots/bin/lock
+bindsym $mod+Shift+p exec pycharm
 bindsym $mod+Shift+f exec firefox
+
+bindsym $mod+space exec rofi -show run 
+bindsym $mod+l exec ~/dots/bin/lock
 bindsym $mod+d exec rofi -show run 
-bindsym $mod+Shift+p exec pavucontrol
-bindsym $mod+Shift+g exec firefox --new-window "https://www.reddit.com/"
 
 for_window [class="^.*"] border pixel 0
 gaps inner 5

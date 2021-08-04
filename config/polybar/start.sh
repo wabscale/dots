@@ -12,8 +12,8 @@ while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
 cd ~/.config/polybar
 
-export WIRED=$(ip -br link show | awk '{print $1}' | nice grep 'enp.*$' -oP | head -n 1)
-export WIRELESS=$(ip -br link show | awk '{print $1}' | nice grep 'w.*$' -oP | head -n 1)
+export WIRED=$(ip -br link show | awk '/UP/ {print $1}' | nice grep 'enp.*$' -oP | head -n 1)
+export WIRELESS=$(ip -br link show | awk '/UP/ {print $1}' | nice grep 'w.*$' -oP | head -n 1)
 
 set_wired() {
     export INTERFACE="${WIRED}"

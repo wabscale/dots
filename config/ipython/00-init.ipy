@@ -1,6 +1,10 @@
 import json
+import csv
 import os
-from os import listdir as ls
+from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
+from os import listdir
 
 def jload(filename):
     with open(filename) as f:
@@ -13,3 +17,4 @@ def jdump(data, filename, indent=None):
 
 q=exit
 %alias_magic l ls -p "-alh"
+
