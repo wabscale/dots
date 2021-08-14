@@ -28,6 +28,7 @@ fi
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules} -n'
 
 # git
+alias g=git
 alias gits='git status -s'
 alias gita='git add'
 alias gitd='git diff'
