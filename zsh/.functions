@@ -117,16 +117,7 @@ du() {
 }
 
 dul() {
-    if [ $# = 0 ]; then
-        DU_PATH=$(pwd)
-    else
-        DU_PATH=$(pwd)/$1
-    fi
-
-    for i in $(ls -A $DU_PATH); do
-        nice du -h -d 0 $DU_PATH/$i;
-    done | sort -h -r -
-
+    find ${1:-.} -mindepth 1 -maxdepth 1 -name '*' -exec du -h -d 0 '{}' + | sort -h -r -
 }
 
 
