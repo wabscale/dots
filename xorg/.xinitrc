@@ -21,8 +21,8 @@ cd ~
 
 #sh ~/.screenlayout/main.sh
 
-if xrandr | grep 'DP-4'; then
-    xrandr --output DP-4 --mode 2560x1440 -r 144
+if xrandr | grep 'DP-0'; then
+    xrandr --output DP-0 --mode 2560x1440 -r 144
 fi
 
 if which dunst; then
