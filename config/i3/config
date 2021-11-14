@@ -119,10 +119,11 @@ bindsym $mod+Shift+v exec disp left
 bindsym $mod+Shift+j exec webstorm
 bindsym $mod+Shift+p exec pycharm
 bindsym $mod+Shift+f exec firefox
+bindsym $mod+w exec rofi -show window -theme /usr/share/rofi/themes/Arc-Dark.rasi
 
-bindsym $mod+space exec rofi -show run 
+bindsym $mod+space exec rofi -show run -theme /usr/share/rofi/themes/Arc-Dark.rasi
 bindsym $mod+l exec ~/dots/bin/lock
-bindsym $mod+d exec rofi -show run 
+bindsym $mod+d exec rofi -show run -theme /usr/share/rofi/themes/Arc-Dark.rasi
 
 for_window [class="^.*"] border pixel 0
 gaps inner 5
