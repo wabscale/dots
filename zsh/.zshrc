@@ -34,7 +34,7 @@ if [ -f ~/dots/zsh/.env ]; then
     source ~/dots/zsh/.env_vars
 fi
 
-BANNER_FILE=$(echo $HOME/dots/zsh/`hostname` | awk '{print tolower($0)}')
+BANNER_FILE=$(echo $HOME/dots/zsh/`cat /etc/hostname` | awk '{print tolower($0)}')
 if [ -f ${BANNER_FILE} ]; then
     cat ${BANNER_FILE} | lolcat
 fi
