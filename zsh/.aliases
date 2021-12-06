@@ -49,6 +49,7 @@ alias gitbare='git config --bool core.bare true'
 alias gitrm='git rm'
 alias gitcl='git clone --recurse-submodules'
 alias gitr='git rebase'
+alias lg='lazygit'
 
 # for network tests
 alias wget='wget -v'
