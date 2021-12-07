@@ -1,18 +1,18 @@
 #!/bin/bash
 
 i3lock --color=202020 \
-       --ringcolor=ff0000ff \
-       --insidevercolor=00000000 \
-       --insidecolor=00000000 \
-       --timecolor=ff0000ff \
-       --datecolor=ff0000ff \
-       --ringwrongcolor=00000000 \
-       --wrongcolor=00000000 \
-       --veriftext="Yee" \
-       --wrongtext="Nah..." \
-       --timestr="%I:%M:%S %P" \
+       --ring-color=ff0000ff \
+       --insidever-color=00000000 \
+       --inside-color=00000000 \
+       --time-color=ff0000ff \
+       --date-color=ff0000ff \
+       --ringwrong-color=00000000 \
+       --wrong-color=000000ff \
+       --verif-text="Yee" \
+       --wrong-text="Nah" \
+       --time-str="%I:%M:%S %P" \
        --radius 120 \
-       --datestr="%d/%m/%Y" \
-       --blur=5 \
+       --date-str="%F" \
+       --blur=6 \
        -f \
-       -k 
+       -k
