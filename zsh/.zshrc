@@ -26,6 +26,7 @@ plugins=(
     docker-compose
     zsh-autosuggestions
     zsh-syntax-highlighting
+    conda-zsh-completion
 #    web-search
 #    python
 )
