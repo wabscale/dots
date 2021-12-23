@@ -31,9 +31,16 @@ plugins=(
 #    python
 )
 
-if [ -f ~/dots/zsh/.env ]; then
-    source ~/dots/zsh/.env_vars
-fi
+
+append_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+        ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+
 
 BANNER_FILE=$(echo $HOME/dots/zsh/`cat /etc/hostname` | awk '{print tolower($0)}')
 if [ -f ${BANNER_FILE} ]; then
@@ -51,9 +58,7 @@ include_paths=(
 )
 
 for p in ${include_paths[@]}; do
-    if ! echo $PATH | grep $p &> /dev/null; then
-        export PATH=$p:$PATH
-    fi
+    append_path $p
 done
 
 
@@ -121,13 +126,6 @@ for i in $sourcefiles; do
     fi
 done
 
-if [ -d ~/.asdf ]; then
-    source ~/.asdf/asdf.sh
-    source ~/.asdf/completions/asdf.bash
-fi
-
-
-
 function aconda() {
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
@@ -144,5 +142,3 @@ function aconda() {
     unset __conda_setup
     # <<< conda initialize <<<
 }
-
-export PATH=$PATH:/home/jc/bin
