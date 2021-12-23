@@ -123,6 +123,8 @@ alias kctlf='kubectl apply -f'
 alias mk=minikube
 alias mkctl='minikube kubectl --'
 alias ktoken='kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}" | xclip'
+alias ktok=token
+alias kt=ktoken
 
 # Vagrant
 alias v=vagrant
