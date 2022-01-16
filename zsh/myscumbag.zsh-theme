@@ -1,4 +1,15 @@
 #!/bin/sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
+}
+
+setopt prompt_subst
+
+autoload -U add-zsh-hook
+autoload -Uz vcs_info
+
 function my_git_prompt() {
   tester=$(git rev-parse --git-dir 2> /dev/null) || return
   
@@ -72,7 +83,7 @@ function mygit() {
 
 local ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%?%{$reset_color%}"
 #PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[blue]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $(mydocker)\n[${ret_status}] %# '
-PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[white]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $(mydocker)\n[${ret_status}] %# '
+PROMPT=$'$(ssh_connection)%{$fg_bold[green]%}%n%{$reset_color%}%{$fg_bold[white]%}@%{$reset_color%}%{$fg_bold[green]%}%m%{$reset_color%}$(my_git_prompt) : %{$fg_bold[magenta]%}%~%{$reset_color%} $vcs_info_msg_0_$(virtualenv_info) $(mydocker)\n[${ret_status}] %# '
 
 ZSH_THEME_PROMPT_RETURNCODE_PREFIX="%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_PREFIX=" $fg[white]‹ %{$fg_bold[yellow]%}"
