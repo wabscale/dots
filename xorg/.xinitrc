@@ -21,9 +21,9 @@ cd ~
 
 #sh ~/.screenlayout/main.sh
 
-if xrandr | grep 'DP-0'; then
-    xrandr --output DP-0 --mode 2560x1440 -r 144
-fi
+#if xrandr | grep 'DP-0'; then
+#    xrandr --output DP-0 --mode 2560x1440 -r 144
+#fi
 
 if which dunst; then
     killall -9 dunst
