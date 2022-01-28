@@ -1,6 +1,18 @@
 #!/usr/bin/zsh
 # user, host, full path, and time/date on two lines for easier vgrepping
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
+}
+
+setopt prompt_subst
+
+autoload -U add-zsh-hook
+autoload -Uz vcs_info
+
+
 function hg_prompt_info {
   if (( $+commands[hg] )) && grep -q "prompt" ~/.hgrc 2> /dev/null; then
     hg prompt --angle-brackets "\
@@ -37,7 +49,7 @@ mydocker() {
 }
 
 # alternate prompt with git & hg
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}<$(mygit)$(hg_prompt_info)>%{$reset_color%} $(mydocker) 
+PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}<$(mygit)$(hg_prompt_info)>%{$reset_color%} $vcs_info_msg_0_$(virtualenv_info)  $(mydocker) 
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(retcode)%{$fg_bold[blue]%}] %{$fg_bold[red]%}$%{$reset_color%} '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
