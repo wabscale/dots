@@ -133,3 +133,6 @@ alias vup='vagrant up'
 alias vssh='vagrant ssh'
 alias vpro='vagrant provision'
 alias vyeet='vagrant destroy --force'
+
+# K8S
+alias pacman='sudo pacman'
