@@ -144,3 +144,5 @@ alias py37='conda activate py37_64'
 alias py38='conda activate py38_64'
 alias py39='conda activate py39_64'
 alias py310='conda activate py310_64'
+
+alias pacman='sudo pacman'
