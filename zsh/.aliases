@@ -49,6 +49,10 @@ alias gitbare='git config --bool core.bare true'
 alias gitrm='git rm'
 alias gitcl='git clone --recurse-submodules'
 alias gitr='git rebase'
+alias gitcp='git cherry-pick'
+alias gitst='git stash'
+alias gitss='git stash save'
+alias gitsp='git stash pop'
 alias lg='lazygit'
 
 # for network tests
@@ -134,5 +138,9 @@ alias vssh='vagrant ssh'
 alias vpro='vagrant provision'
 alias vyeet='vagrant destroy --force'
 
-# K8S
-alias pacman='sudo pacman'
+# conda
+alias py36='conda activate py36_64'
+alias py37='conda activate py37_64'
+alias py38='conda activate py38_64'
+alias py39='conda activate py39_64'
+alias py310='conda activate py310_64'
