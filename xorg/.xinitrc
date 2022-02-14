@@ -25,6 +25,8 @@ cd ~
 #    xrandr --output DP-0 --mode 2560x1440 -r 144
 #fi
 
+ibus-daemon -drxR
+
 if which dunst; then
     killall -9 dunst
     dunst &

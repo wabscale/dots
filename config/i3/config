@@ -122,7 +122,6 @@ bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+k exec env DISPLAY=:0 kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}" | xclip -selection c
 bindsym $mod+w exec rofi -show window -theme /usr/share/rofi/themes/Arc-Dark.rasi
 
-bindsym $mod+space exec rofi -show run -theme /usr/share/rofi/themes/Arc-Dark.rasi
 bindsym $mod+l exec ~/dots/bin/lock
 bindsym $mod+d exec rofi -show run -theme /usr/share/rofi/themes/Arc-Dark.rasi
 
