@@ -32,4 +32,6 @@ if which dunst; then
     dunst &
 fi
 
+sudo systemctl stop ping sshd
+
 exec i3
