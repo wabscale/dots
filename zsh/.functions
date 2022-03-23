@@ -377,7 +377,7 @@ ddg() { firefox "https://duckduckgo.com/?q=$(echo $@ | xargs)" }
 
 kdash() {
     {
-        sleep 1
+        sleep 2
         firefox 'http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/workloads?namespace=_all'
     } &
     kubectl -n kubernetes-dashboard get secret \
