@@ -115,7 +115,7 @@ font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
 ;   modules-right = ipc clock
 modules-left = i3
 modules-center =
-modules-right = lan sep memory sep cpu sep filesystem sep date
+modules-right = lan sep memory sep cpu sep temperature sep filesystem sep date
 
 ; The separator will be inserted between the output of each module
 separator =
@@ -372,7 +372,7 @@ type = internal/temperature
 
 ; Seconds to sleep between updates
 ; Default: 1
-interval = 0.5
+interval = 3
 
 ; Thermal zone to use
 ; To list all the zone types, run
@@ -385,7 +385,7 @@ thermal-zone = 0
 ; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
 ; to find path to desired file
 ; Default reverts to thermal zone setting
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+hwmon-path = ${env:HWMONPATH:"/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"}
 
 ; Threshold temperature to display warning label (in degrees celsius)
 ; Default: 80
