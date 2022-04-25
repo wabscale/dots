@@ -414,3 +414,13 @@ fsync() {
         parallel --quote -j12 rsync --times --progress \
                  --human-readable --relative ${1}:{} "${3:-.}"
 }
+
+de() {
+    if [ -n "${CONDA_DEFAULT_ENV}" ]; then
+        while [ -n "${CONDA_DEFAULT_ENV}" ]; do
+            conda deactivate
+        done
+    else
+        deactivate
+    fi
+}

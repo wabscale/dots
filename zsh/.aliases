@@ -101,7 +101,7 @@ alias eenv='e ~/dots/zsh/.env_vars'
 alias base64='base64 -w 0'
 alias cll='clear; l'
 alias ctl='sudo systemctl'
-alias de=deactivate
+# alias de=deactivate
 # alias startx=xinit # don't ask
 alias top=htop
 alias wh=which
@@ -147,3 +147,6 @@ alias py39='conda activate py39_64'
 alias py310='conda activate py310_64'
 
 alias pacman='sudo pacman'
+
+alias gpge='gpg --encrypt --armor --recipient johncunniff1248@gmail.com'
+alias gpgd='gpg --decrypt'
