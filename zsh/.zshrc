@@ -10,6 +10,7 @@ case $- in
 esac
 
 export ZSH=$HOME/.oh-my-zsh
+export GPG_TTY=$(tty)
 
 ZSH_THEME="jmc"
 BULLETTRAIN_STATUS_EXIT_SHOW=true
