@@ -83,12 +83,12 @@ alias dshell='docker run -it -v `pwd`:~/host --workdir ~/host --rm debian:stretc
 alias ashell='docker run -it -v `pwd`:~/host --workdir ~/host --rm alpine:3.9'
 
 # docker-compose
-alias dc='docker-compose'
-alias dcb='docker-compose build'
-alias dcu='docker-compose up'
-alias dcr='docker-compose run'
-alias dcd='docker-compose down'
-alias dck='docker-compose kill'
+alias dc='docker compose'
+alias dcb='docker compose build'
+alias dcu='docker compose up'
+alias dcr='docker compose run'
+alias dcd='docker compose down'
+alias dck='docker compose kill'
 
 # misc.
 alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
