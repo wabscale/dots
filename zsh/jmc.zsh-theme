@@ -3,10 +3,6 @@
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
-}
-
 setopt prompt_subst
 
 autoload -U add-zsh-hook
@@ -65,14 +61,18 @@ function my_current_branch() {
 
 function retcode() {}
 
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo -n "%{$fg[blue]%}(`basename $VIRTUAL_ENV`)%{$reset_color%}"
+}
+
 mydocker() {
     if [ -f ./docker-compose.yml ] || [ -f ./docker-compose.yaml ] || [ -f ./Dockerfile ]; then
-       echo "%{$fg[blue]%} %{$reset_color%}"
+       echo "%{$fg[blue]%} % {$reset_color%}"
     fi
 }
 
 # alternate prompt with git & hg
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} :: %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} :: $(my_git_prompt) $vcs_info_msg_0_$(virtualenv_info)  $(mydocker) 
+PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} :: %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} :: $(my_git_prompt) $vcs_info_msg_0_$(virtualenv_info)$(mydocker) 
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(retcode)%{$fg_bold[blue]%}] %{$fg_bold[red]%}$%{$reset_color%} '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
