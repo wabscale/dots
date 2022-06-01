@@ -130,6 +130,7 @@ gdb() {
 dkill() {
     docker kill `docker ps -q`
     docker system prune -f
+    docker system prune -f  # for some reason
 }
 
 dcleanv() {
