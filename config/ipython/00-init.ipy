@@ -1,19 +1,12 @@
 import json
 import csv
+import sys
 import os
-from datetime import datetime, timedelta
-# import pandas as pd
+import pytz
+import pandas as pd
 import numpy as np
-from os import listdir
-
-def jload(filename):
-    with open(filename) as f:
-        return json.loads(f.read())
-
-def jdump(data, filename, indent=None):
-    with open(filename, 'w') as f:
-        f.write(json.dumps(data, indent=indent))
-
+from datetime import date, datetime, timedelta
+#from tzlocal import get_localzone
 
 q=exit
 %alias_magic l ls -p "-alh"
