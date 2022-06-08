@@ -10,4 +10,5 @@ from datetime import date, datetime, timedelta
 
 q=exit
 %alias_magic l ls -p "-alh"
+%autocall 1
 
