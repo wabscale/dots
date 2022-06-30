@@ -107,7 +107,7 @@ alias top=htop
 alias wh=which
 alias p=ccat
 alias q=exit
-alias ccache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
+alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
 
 # lolz
 alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
