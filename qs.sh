@@ -12,12 +12,12 @@ set -ex
 
 if which apt-get; then  # debian
     sudo apt-get update
-    sudo apt-get install -y git zsh python3 python3-pip emacs-nox
+    sudo apt-get install -y git zsh python3 python3-pip emacs-nox fzf
 elif which yum; then  # redhat
     sudo yum update
-    sudo yum install git zsh python3
+    sudo yum install git zsh python3 fzf
 elif which pacman; then  # arch
-    sudo pacman -Syu git zsh python python-pip emacs-nox
+    sudo pacman -Syu git zsh python python-pip emacs-nox fzf
 fi
 
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh; fi
@@ -27,6 +27,7 @@ if [ -f ~/.zshrc ]; then rm ~/.zshrc; fi
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/Aloxaf/fzf-tab.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 git clone https://github.com/wabscale/dots.git ~/dots
 
 ln -s ~/dots/zsh/.zshrc ~/.zshrc

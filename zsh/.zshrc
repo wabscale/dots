@@ -25,6 +25,7 @@ plugins=(
     battery
     docker
     docker-compose
+    fzf-tab
     zsh-autosuggestions
     zsh-syntax-highlighting
 #    conda-zsh-completion
