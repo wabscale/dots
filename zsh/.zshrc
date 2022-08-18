@@ -43,6 +43,8 @@ append_path () {
     esac
 }
 
+export GPG_TTY=$(tty)
+
 
 BANNER_FILE=$(echo $HOME/dots/zsh/`cat /etc/hostname` | awk '{print tolower($0)}')
 if [ -f ${BANNER_FILE} ]; then
@@ -57,6 +59,8 @@ include_paths=(
     "$HOME/.yarn/bin"
     "$HOME/.config/yarn/global/node_modules/.bin"
     "$HOME/.cargo/bin"
+    "$HOME/go/bin"
+    "$HOME/.local/bin"
 )
 
 for p in ${include_paths[@]}; do
