@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# derived source: https://github.com/luksa/kubectl-plugins
+
+set -e
+
+node_list() {
+    kubectl get node -o name | sed 's/node\///' | tr '\n' ' '
+}
+
+prune_node() {
+  node=$1
+  if [ "$node" = "" ]; then
+    node=$(node_list)
+    node=${node::-1}
+
+    if [[ "$node" =~ " " ]]; then
+      echo "Node name must be specified. Choose one of: [$node]"
+      exit 1
+    else
+      echo "Single-node cluster detected. Defaulting to node $node"
+    fi
+  fi
+
+  pod=$(
+    kubectl create -o name -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: prune-node-
+  labels:
+    plugin: prune-node
+spec:
+  nodeName: $node
+  containers:
+  - name: prune-node
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ["chroot", "/host", "crictl", "rmi", "--prune"]
+    tty: true
+    stdin: true
+    stdinOnce: true
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: host
+      mountPath: /host
+  volumes:
+  - name: host
+    hostPath:
+      path: /
+  hostNetwork: true
+  hostIPC: true
+  hostPID: true
+  restartPolicy: Never
+EOF
+  )
+
+  deletePod() {
+    kubectl delete $pod --wait=false
+  }
+  trap deletePod EXIT
+
+  echo "Created $pod"
+  echo "Waiting for container to start..."
+  kubectl wait --for=condition=Ready $pod >/dev/null
+  kubectl attach -it $pod -c prune-node
+
+}
+
+
+prune_all() {
+    nodes=$(node_list)
+    set +e
+    for node in ${nodes[@]}; do
+        echo "pruning node ${node}"
+        prune_node ${node}
+    done
+}
+
+print_usage() {
+  echo "Provider-agnostic way of opening a remote shell to a Kubernetes node."
+  echo
+  echo "Enables you to access a node even when it doesn't run an SSH server or"
+  echo "when you don't have the required credentials. Also, the way you log in"
+  echo "is always the same, regardless of what provides the Kubernetes cluster"
+  echo "(e.g. Minikube, Kind, Docker Desktop, GKE, AKS, EKS, ...)"
+  echo
+  echo "You must have cluster-admin rights to use this plugin."
+  echo
+  echo "The primary focus of this plugin is to provide access to nodes, but it"
+  echo "also provides a quick way of running a shell inside a pod."
+  echo
+  echo "Examples: "
+  echo "  # Prunes all nodes in cluster"
+  echo "  kubectl prune node"
+  echo
+  echo "  # Prune node of a single-node cluster (e.g. Docker Desktop)"
+  echo "  kubectl prune node"
+  echo
+  echo "  # Prune node of a multi-node cluster (e.g. GKE)"
+  echo "  kubectl prune node my-worker-node-1"
+  echo
+  echo
+  echo "Usage:"
+  echo "  kubectl prune all"
+  echo "  kubectl prune node [nodeName]"
+  exit 0
+}
+
+if [ "$1" == "--help" ]; then
+  print_usage
+fi
+
+if [[ "$1" == node/* ]]; then
+    prune_node ${1:5}
+elif [ "$1" == "node" ]; then
+    prune_node $2
+elif [ "$1" == "all" ]; then
+    prune_all
+else
+  print_usage
+fi
