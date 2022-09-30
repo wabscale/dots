@@ -62,7 +62,8 @@ function my_current_branch() {
 function retcode() {}
 
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo -n "%{$fg[blue]%}(`basename $VIRTUAL_ENV`)%{$reset_color%}"
+  [ $VIRTUAL_ENV ] && echo -n "%{$fg[blue]%}(%{$fg_bold[yellow]%}`basename $VIRTUAL_ENV`%{$fg[blue]%})%{$reset_color%} "
+    [ $CONDA_DEFAULT_ENV ] && echo -n "%{$fg[blue]%}(%{$fg_bold[yellow]%}`basename $CONDA_DEFAULT_ENV`%{$fg[blue]%})%{$reset_color%}"
 }
 
 mydocker() {
@@ -72,7 +73,7 @@ mydocker() {
 }
 
 # alternate prompt with git & hg
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} :: %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} :: $(my_git_prompt) $vcs_info_msg_0_$(virtualenv_info)$(mydocker) 
+PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[yellow]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} :: %{$fg_bold[blue]%}[%{$fg_bold[white]%}%~%{$fg_bold[blue]%}]%{$reset_color%} :: $(my_git_prompt)$vcs_info_msg_0_$(virtualenv_info)$(mydocker) 
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(retcode)%{$fg_bold[blue]%}] %{$fg_bold[red]%}$%{$reset_color%} '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
@@ -87,4 +88,4 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}●"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg_bold[red]%}●"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[white]%}●"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}✕"
-ZSH_THEME_GIT_PROMPT_SUFFIX=" $fg_bold[blue]>%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=" $fg_bold[blue]>%{$reset_color%} "
