@@ -87,7 +87,7 @@ py() {
 }
 
 pack() {
-    if tar zcvf $1.tgz $@; then
+    if tar -I pigz -cvf $1.tgz $@; then
         echo packed into $1.tgz
     fi
 }
