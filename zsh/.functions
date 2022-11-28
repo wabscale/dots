@@ -87,9 +87,11 @@ py() {
 }
 
 pack() {
-    if tar -I pigz -cvf $1.tgz $@; then
-        echo packed into $1.tgz
-    fi
+    tar cf - ${1} -P | pv -s $(nice du -b -d 0 ${1} | awk '{print $1}') | pigz - > ${1}.tar.gz
+}
+
+unpack() {
+    tar -I pigz -v -xf ${1} | pv -s $(tar -I pigz -tvf ${1} | wc -l)
 }
 
 e() {
