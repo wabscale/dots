@@ -145,18 +145,20 @@ for i in $sourcefiles; do
 done
 
 function aconda() {
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/opt/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+        # . "/opt/conda/etc/profile.d/conda.sh"  # commented out by conda initialize
     else
-        if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
-            # . "/opt/conda/etc/profile.d/conda.sh"  # commented out by conda initialize
-        else
-            # export PATH="/opt/conda/bin:$PATH"  # commented out by conda initialize
-        fi
+        # export PATH="/opt/conda/bin:$PATH"  # commented out by conda initialize
     fi
-    unset __conda_setup
-    # <<< conda initialize <<<
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+conda activate py310_64
 }
+

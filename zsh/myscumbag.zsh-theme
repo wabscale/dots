@@ -1,8 +1,11 @@
 #!/bin/sh
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+conda config --set changeps1 False &> /dev/null
+
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo ' ('%F{blue}`basename $VIRTUAL_ENV`%f')'
+    [ $VIRTUAL_ENV ] && echo -n " %{$fg[blue]%}(%{$fg_bold[yellow]%}`basename $VIRTUAL_ENV`%{$fg[blue]%})%{$reset_color%} "
+    [ $CONDA_DEFAULT_ENV ] && echo -n " %{$fg[blue]%}(%{$fg_bold[yellow]%}`basename $CONDA_DEFAULT_ENV`%{$fg[blue]%})%{$reset_color%}"
 }
 
 setopt prompt_subst
