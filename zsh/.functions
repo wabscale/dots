@@ -55,6 +55,14 @@ gitqs() { # git quick save
     git push
 }
 
+gitlinestat() {
+    if (( $# != 1 )); then
+        echo 'gitlinestat <commit/-n>'
+        return 1
+    fi
+    git log --numstat --pretty="%H" ${1} | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d, -%d\n", plus, minus)}'
+}
+
 monport() {
     sudo tcpdump -vv port $1 and '(tcp-syn|tcp-ack)!=0'
 }
