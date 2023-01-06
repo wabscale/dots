@@ -140,7 +140,6 @@ gdb() {
 dkill() {
     docker kill `docker ps -q`
     docker system prune -f
-    docker system prune -f  # for some reason
 }
 
 dcleanv() {
@@ -150,10 +149,10 @@ dcleanv() {
 
 dclean() {
     # https://lebkowski.name/docker-volumes/
-    dkill
-    dcleanv
-    docker rmi `docker image list -q`
-    for i in $(docker image list -q); do docker rmi -f $i; done
+    docker kill `docker ps -q`
+    docker rm `docker ps -qa`
+    docker images prune --all
+    docker system prune --all --force
 }
 
 trizen() {
