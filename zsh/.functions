@@ -153,7 +153,7 @@ dclean() {
     docker rm `docker ps -qa`
     docker images prune --all
     docker system prune --all --force
-    docker volume prune --all
+    docker volume prune --force
 }
 
 trizen() {

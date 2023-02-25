@@ -6,7 +6,6 @@ alias mv='mv -v'
 alias rmr='rm -r'
 alias rmrf='rm -rf'
 alias cpr='cp -r'
-alias scp='scp -v'
 alias t='tree -aCFh -I .git'
 
 # ls stuff
@@ -139,6 +138,7 @@ alias vup='vagrant up'
 alias vssh='vagrant ssh'
 alias vpro='vagrant provision'
 alias vyeet='vagrant destroy --force'
+alias vyup='vagrant destroy --force && vagrant up'
 
 # conda
 alias py36='conda activate py36_64'
