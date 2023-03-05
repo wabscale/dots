@@ -12,7 +12,7 @@ while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
 cd ~/.config/polybar
 
-export WIRED=$(ip -br link show | awk '/UP/ {print $1}' | nice grep 'enp.*$' -oP | head -n 1)
+export WIRED=$(ip -br link show | awk '/UP/ {print $1}' | nice grep 'eno.*$' -oP | head -n 1)
 export WIRELESS=$(ip -br link show | awk '/UP/ {print $1}' | nice grep 'w.*$' -oP | head -n 1)
 export HWMONPATH=$(for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done | awk '/k10temp: Tctl/ {print $3}')
 
