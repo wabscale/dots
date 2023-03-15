@@ -25,6 +25,9 @@ cd ~
 #    xrandr --output DP-0 --mode 2560x1440 -r 144
 #fi
 
+killall -9 kwalletd5
+kwalletd5 &
+
 ibus-daemon -drxR
 
 if which dunst; then
