@@ -91,8 +91,8 @@ alias dcd='docker compose down'
 alias dck='docker compose kill'
 
 # misc.
+alias rsync='rsync --info=progress2 -a'
 alias cl='clear; cat ~/dots/zsh/$(hostname) | lolcat'
-# alias rsync='rsync -r -ah --progress'
 alias src='unalias -a; source ~/.zshrc'
 alias erc='e ~/.zshrc; source ~/.zshrc'
 alias efunc='e ~/dots/zsh/.functions'
