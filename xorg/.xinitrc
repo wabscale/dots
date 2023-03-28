@@ -28,6 +28,9 @@ cd ~
 killall -9 kwalletd5
 kwalletd5 &
 
+killall -9 guake
+guake &
+
 ibus-daemon -drxR
 
 if which dunst; then

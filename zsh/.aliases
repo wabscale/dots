@@ -16,7 +16,7 @@ else
     alias ll='ls --color=auto -l'
     if which exa &> /dev/null; then
         alias la='exa -abghlT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
-        alias l='exa -abghl --git'
+        alias l='exa -abghl --git -a'
     else
         alias la='ls --color=auto -a'
         alias l='ls --color=auto -aCFlh'
@@ -43,16 +43,23 @@ alias gitl='git log --graph --show-signature --date=iso-local --format=fuller --
 alias gitre='git reset'
 alias gitsh='git push'
 alias gitll='git pull --rebase'
+alias gitllff='git pull --ff'
 alias gitssh='git push --set-upstream origin $(git branch --show-current) --tags'
 alias gitsave='git config credential.helper store'
 alias gitbare='git config --bool core.bare true'
 alias gitrm='git rm'
 alias gitcl='git clone --recurse-submodules'
+alias gitff='git merge --ff-only'
 alias gitr='git rebase'
+alias gitra='git rebase --abort'
+alias gitrc='git rebase --continue'
+alias gitrs='git rebase --skip'
+alias gitre='git rebase --edit-todo'
 alias gitcp='git cherry-pick'
 alias gitst='git stash'
 alias gitss='git stash save'
 alias gitsp='git stash pop'
+alias gitlt='git describe --tags --abbrev=0'
 alias lg='lazygit'
 
 # for network tests
