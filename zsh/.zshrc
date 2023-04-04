@@ -61,6 +61,7 @@ include_paths=(
     "$HOME/.cargo/bin"
     "$HOME/go/bin"
     "$HOME/.local/bin"
+    "/opt/conda/bin"
 )
 
 for p in ${include_paths[@]}; do
