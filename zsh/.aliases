@@ -115,6 +115,7 @@ alias wh=which
 alias p=ccat
 alias q=exit
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
+alias lapperf='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
 # lolz
 alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
