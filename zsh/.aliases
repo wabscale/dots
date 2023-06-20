@@ -7,6 +7,7 @@ alias rmr='rm -r'
 alias rmrf='rm -rf'
 alias cpr='cp -r'
 alias t='tree -aCFh -I .git'
+alias rp='realpath'
 
 # ls stuff
 if [ -z "$(uname -a | nice grep Linux)" ]; then
@@ -54,7 +55,6 @@ alias gitr='git rebase'
 alias gitra='git rebase --abort'
 alias gitrc='git rebase --continue'
 alias gitrs='git rebase --skip'
-alias gitre='git rebase --edit-todo'
 alias gitcp='git cherry-pick'
 alias gitst='git stash'
 alias gitss='git stash save'
@@ -115,7 +115,7 @@ alias wh=which
 alias p=ccat
 alias q=exit
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
-alias lapperf='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias m=make
 
 # lolz
 alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
