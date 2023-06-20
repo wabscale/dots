@@ -25,18 +25,22 @@ cd ~
 #    xrandr --output DP-0 --mode 2560x1440 -r 144
 #fi
 
-killall -9 kwalletd5
-kwalletd5 &
+# killall -9 kwalletd5
+# kwalletd5 &
 
-killall -9 guake
-guake &
+# killall -9 guake
+# guake &
 
-ibus-daemon -drxR
+# ibus-daemon -drxR
 
-if which dunst; then
-    killall -9 dunst
-    dunst &
-fi
+# if which dunst; then
+#     killall -9 dunst
+#     dunst &
+# fi
+
+
+export XDG_CURRENT_DESKTOP=XFCE
+killall -9 dunst guake kwalletd5 ibus-daemon
 
 sudo systemctl stop ping sshd
 
