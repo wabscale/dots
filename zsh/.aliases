@@ -116,7 +116,9 @@ alias p=ccat
 alias q=exit
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
 alias m=make
-
+alias beep='play -q -n synth 0.5 sin 880 || echo -e "\a"'
+alias beepbeep='beep && sleep 0.5 && beep'
+alias beepbeepbeep='beepbeep && sleep 0.5 && beep'
 # lolz
 alias gimmemake='cp ~/dots/templates/Makefile ./ && touch requirements.txt'
 alias gimmesolve='cp ~/dots/templates/solve ./'
@@ -145,6 +147,7 @@ alias vag=vagrant
 alias vup='vagrant up'
 alias vssh='vagrant ssh'
 alias vpro='vagrant provision'
+alias vre='vagrant halt && vagrant up'
 alias vyeet='vagrant destroy --force'
 alias vyup='vagrant destroy --force && vagrant up'
 
