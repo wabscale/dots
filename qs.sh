@@ -1,12 +1,9 @@
 #!/bin/sh
 
 "
-Quick setup script for https://gitlab.com/b1g_J/dots
+Quick setup script for https://github.com/wabscale/dots
 This will install the my zsh environment on debian or centOS machines.
 "
-
-# To install:
-# curl https://f.bigj.dev/f/qs.sh | sh
 
 set -ex
 
@@ -92,3 +89,9 @@ mkdir -p ~/.emacs.d
 EOF
 
 chsh -s $(which zsh)
+
+
+curl https://get.docker.com | sudo sh
+sudo systemctl enable --now docker
+sudo usermod -aG docker ${USER}
+echo 'You will need to either reboot or logout for the docker permissions to work'

@@ -30,7 +30,6 @@ yes | sudo apt upgrade -y
 sudo apt install -y git curl python3 python3-pip
 
 curl https://get.docker.com | sh
-sudo pip3 install docker-compose
 
 sudo usermod -aG docker ${USER}
 
