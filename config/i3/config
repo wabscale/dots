@@ -112,6 +112,7 @@ bindsym $mod+Shift+g exec firefox --private-window
 bindsym $mod+Shift+n exec ~/.screenlayout/3b.sh
 bindsym $mod+Shift+a exec pavucontrol
 bindsym $mod+Shift+t exec ~/dots/bin/starttor
+bindsym $mod+Shift+d exec chromium
 #bindsym $mod+Shift+d exec disp right rotate
 #bindsym $mod+Shift+x exec xrandr --auto
 #bindsym $mod+Shift+m exec disp mirror

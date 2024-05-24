@@ -15,9 +15,10 @@ if [ -z "$(uname -a | nice grep Linux)" ]; then
     alias la='ls -a'
 else
     alias ll='ls --color=auto -l'
-    if which exa &> /dev/null; then
-        alias la='exa -abghlT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
-        alias l='exa -abghl --git -a'
+    if which eza &> /dev/null; then
+        alias la='eza -abghlT --ignore-glob=".bzr|CVS|.git|.hg|.svn|node_modules|__pycache__" --git'
+        alias l='eza -abghl --git -a'
+        alias ll='l --time-style long-iso'
     else
         alias la='ls --color=auto -a'
         alias l='ls --color=auto -aCFlh'

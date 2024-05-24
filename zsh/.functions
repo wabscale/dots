@@ -151,7 +151,7 @@ dclean() {
     # https://lebkowski.name/docker-volumes/
     docker kill `docker ps -q`
     docker rm `docker ps -qa`
-    docker images prune --all
+    docker image prune --all --force
     docker system prune --all --force
     docker volume prune --force
 }
